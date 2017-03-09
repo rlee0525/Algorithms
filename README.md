@@ -2,8 +2,8 @@
 
 ## [Cracking The Coding Interview](/CTCI)
 
-## LeetCode
+## [LeetCode](/LeetCode)
 
-## HackerRank
+## [HackerRank](/HackerRank)
 
-## Algorithm Projects
+## [Algorithm Projects](/Projects)
