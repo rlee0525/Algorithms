@@ -83,3 +83,22 @@ def add_to_list(lists, node, depth)
   add_to_list(lists, node.left, depth - 1)
   add_to_list(lists, node.right, depth - 1)
 end
+
+def balanced_tree(root)
+  check_height(root) != false
+end
+
+def check_height(root)
+  return -1 unless root
+
+  depth_left = balanced_tree(root.left)
+  depth_right = balanced_tree(root.right)
+
+  return false if depth_left == false || depth_right == false
+
+  if (depth_left - depth_right).abs > 1
+    return false
+  else
+    [depth_left, depth_right].max + 1
+  end
+end
