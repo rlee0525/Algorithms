@@ -1,6 +1,6 @@
 # Algorithms
 
-## Cracking The Coding Interview
+## [Cracking The Coding Interview](/CTCI)
 
 ## LeetCode
 

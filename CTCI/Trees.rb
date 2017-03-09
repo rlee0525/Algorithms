@@ -42,3 +42,17 @@ def minimal_tree(array)
 end
 
 p minimal_tree([1, 2, 3, 4, 5, 6, 7])
+
+
+class LinkedList
+  attr_accessor :node, :next
+
+  def initialize(node)
+    @node = node
+    @next = nil
+  end
+end
+
+def depth_list(tree)
+  
+end
