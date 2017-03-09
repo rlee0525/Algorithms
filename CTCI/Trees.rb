@@ -102,3 +102,14 @@ def check_height(root)
     [depth_left, depth_right].max + 1
   end
 end
+
+def is_bst?(tree)
+  valid_bst?(tree.root, -FLOAT::INFINITY, FLOAT::INFINITY)
+end
+
+def valid_bst?(node, min, max)
+  return true if node.nil?
+  return false if node.val < min || node.val >= max
+
+  valid_bst?(node.left, min, node.val) && valid_bst?(node.right, node.val, max)
+end
