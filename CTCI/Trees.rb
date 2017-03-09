@@ -47,12 +47,39 @@ p minimal_tree([1, 2, 3, 4, 5, 6, 7])
 class LinkedList
   attr_accessor :node, :next
 
-  def initialize(node)
-    @node = node
-    @next = nil
+  def initialize
+    @head = Node.new
+    @tail = Node.new
+    @head.right = nil
+    @tail.left = nil
+  end
+
+  def append(node)
+    new_link = Node.new(node)
+
+    @tail.left.right = new_link
+    new_link.left = @tail.left
+    new_link.right = @tail
+    @tail.left = new_link
+
+    new_link
   end
 end
 
 def depth_list(tree)
-  
+  return unless root
+
+  lists = []
+  add_to_list(lists, tree.root, 0)
+  lists
+end
+
+def add_to_list(lists, node, depth)
+  if !lists[depth]
+    lists[depth] = LinkedList.new
+  end
+
+  lists[depth].append(node)
+  add_to_list(lists, node.left, depth - 1)
+  add_to_list(lists, node.right, depth - 1)
 end
