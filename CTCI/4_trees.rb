@@ -113,3 +113,7 @@ def valid_bst?(node, min, max)
 
   valid_bst?(node.left, min, node.val) && valid_bst?(node.right, node.val, max)
 end
+
+def successor(node)
+  
+end
