@@ -15,18 +15,18 @@ class Edge
     self.to_vertex = to_vertex
     self.weight = weight
 
-    to_vertex.in_edges << self
-    from_vertex.out_edges << self
+    self.from_vertex.out_edges << self
+    self.to_vertex.in_edges << self
   end
 
   def destroy!
-    self.to_vertex.in_edges.delete(self)
-    self.to_vertex = nil
     self.from_vertex.out_edges.delete(self)
     self.from_vertex = nil
+    self.to_vertex.in_edges.delete(self)
+    self.to_vertex = nil
   end
 
   protected
-  
+
   attr_writer :from_vertex, :to_vertex, :weight
 end
