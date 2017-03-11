@@ -77,8 +77,8 @@ class TreeNode
 end
 
 def minimal_tree(array)
-  return array if array.length < 2
-  
+  return if array.empty?
+
   mid = array.length / 2
   tree = TreeNode.new(array[mid])
   tree.left = minimal_tree(array[0...mid])

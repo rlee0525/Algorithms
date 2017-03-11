@@ -97,7 +97,7 @@ end
 
 #4.2
 def minimal_tree(array)
-  return array if array.length < 2
+  return if array.empty?
 
   mid = array.length / 2
   tree = TreeNode.new(array[mid])
@@ -121,61 +121,60 @@ end
 
 class LinkedList
   def initialize
-    @head = Node.new(nil)
-    @tail = Node.new(nil)
-    @head.next = @tail
-    @tail.prev = @head
+    @head = TreeNode.new(nil)
+    @tail = TreeNode.new(nil)
+    @head.right = @tail
+    @tail.left = @head
   end
 
   def append(node)
-    temp = @tail.prev #head in first case
+    temp = @tail.left #head in first case
 
-    temp.next = node
-    node.prev = temp
-    @tail.prev = node
-    node.next = @tail
+    temp.right = node
+    node.left = temp
+    @tail.left = node
+    node.right = @tail
+
+    node
+  end
+
+  def size
+    current = @head.right
+    count = 0
+
+    until current == @tail
+      count += 1
+      current = current.right
+    end
+
+    count
   end
 end
 
-#4.3
-def list_depth(tree)
+def depth_list(root)
+  lists = {}
+  add_to_list(lists, root, 0)
+  lists
+end
 
+def add_to_list(lists, root, depth)
+  if !lists[depth]
+    lists[depth] = LinkedList.new
+  end
+
+  add_to_list(lists, root.left, depth - 1) if root.left
+  add_to_list(lists, root.right, depth - 1) if root.right
 end
 
 tree = minimal_tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-p list_depth(tree) #depth of 4 ==> 4 linked lists
+p depth_list(tree) #depth of 4 ==> 4 linked lists
+p depth_list(tree).keys.length
 
 
 
 
 
 
-
-
-
-#
-# class LinkedList
-#   attr_accessor :node, :next
-#
-#   def initialize
-#     @head = Node.new
-#     @tail = Node.new
-#     @head.right = nil
-#     @tail.left = nil
-#   end
-#
-#   def append(node)
-#     new_link = Node.new(node)
-#
-#     @tail.left.right = new_link
-#     new_link.left = @tail.left
-#     new_link.right = @tail
-#     @tail.left = new_link
-#
-#     new_link
-#   end
-# end
-#
 # def depth_list(tree)
 #   return unless root
 #
