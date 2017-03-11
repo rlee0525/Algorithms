@@ -31,6 +31,7 @@ class Edge
   attr_writer :from_vertex, :to_vertex, :weight
 end
 
+#Test graph
 a = Vertex.new(1)
 b = Vertex.new(2)
 c = Vertex.new(3)
@@ -84,13 +85,30 @@ end
 
 p route_nodes_rec(c, d)
 
+class TreeNode
+  attr_accessor :value, :left, :right
+
+  def initialize(value)
+    @value = value
+    @left = nil
+    @right = nil
+  end
+end
+
 #4.2
 def minimal_tree(array)
   return array if array.length < 2
+
   mid = array.length / 2
-  root = array[mid]
+
+  tree = TreeNode.new(array[mid])
+  tree.left = minimal_tree(array[0...mid])
+  tree.right = minimal_tree(array[mid + 1..-1])
+
+  tree
 end
 
+p minimal_tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
 
 
@@ -106,31 +124,6 @@ end
 
 
 
-
-
-#
-# class Node
-#   attr_accessor :left, :right, :node
-#
-#   def initialize(node)
-#     @node = node
-#     @left = left
-#     @right = right
-#   end
-# end
-#
-# def minimal_tree(array)
-#   return array if array.length < 2
-#
-#   mid = array.length / 2
-#   tree = Node.new(array[mid])
-#   tree.left = minimal_tree(array[0...mid])
-#   tree.right = minimal_tree(array[mid + 1..-1])
-#   tree
-# end
-#
-# p minimal_tree([1, 2, 3, 4, 5, 6, 7])
-#
 #
 # class LinkedList
 #   attr_accessor :node, :next
