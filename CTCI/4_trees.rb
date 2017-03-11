@@ -85,11 +85,11 @@ end
 p route_nodes_rec(c, d)
 
 #4.2
-# def minimal_tree(array)
-#   return array if array.length < 2
-#   mid = array.length / 2
-#   root = array[mid]
-# end
+def minimal_tree(array)
+  return array if array.length < 2
+  mid = array.length / 2
+  root = array[mid]
+end
 
 
 

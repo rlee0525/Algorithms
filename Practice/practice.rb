@@ -30,3 +30,38 @@ class Edge
 
   attr_writer :from_vertex, :to_vertex, :weight
 end
+
+def route_nodes(start_vertex, end_vertex)
+  return true if start_vertex == end_vertex
+
+  queue = [start_vertex]
+  visited = []
+
+  until queue.empty?
+    current = queue.shift
+    current.out_edges.each do |edge|
+      unless visited.include?(edge.to_vertex)
+        return true if edge.to_vertex == end_vertex
+        queue << edge.to_vertex
+      end
+    end
+
+    visited << current
+  end
+
+  false
+end
+
+def route_nodes_rec(start_vertex, end_vertex)
+  return true if start_vertex == end_vertex
+  @visited ||= {}
+  @visited[start_vertex] = true
+
+  start_vertex.out_edges.each do |edge|
+    unless @visited[edge.to_vertex]
+      return true if route_nodes_rec(edge.to_vertex, end_vertex)
+    end
+  end
+
+  false
+end
