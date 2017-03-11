@@ -100,7 +100,6 @@ def minimal_tree(array)
   return array if array.length < 2
 
   mid = array.length / 2
-
   tree = TreeNode.new(array[mid])
   tree.left = minimal_tree(array[0...mid])
   tree.right = minimal_tree(array[mid + 1..-1])
@@ -110,11 +109,41 @@ end
 
 p minimal_tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
+class Node
+  attr_accessor :value, :next, :prev
 
+  def initialize(value)
+    @value = value
+    @next = nil
+    @prev = nil
+  end
+end
 
+class LinkedList
+  def initialize
+    @head = Node.new(nil)
+    @tail = Node.new(nil)
+    @head.next = @tail
+    @tail.prev = @head
+  end
 
+  def append(node)
+    temp = @tail.prev #head in first case
 
+    temp.next = node
+    node.prev = temp
+    @tail.prev = node
+    node.next = @tail
+  end
+end
 
+#4.3
+def list_depth(tree)
+
+end
+
+tree = minimal_tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+p list_depth(tree) #depth of 4 ==> 4 linked lists
 
 
 

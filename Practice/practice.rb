@@ -65,3 +65,24 @@ def route_nodes_rec(start_vertex, end_vertex)
 
   false
 end
+
+class TreeNode
+  attr_accessor :value, :left, :right
+
+  def initialize(value)
+    @value = value
+    @left = nil
+    @right = nil
+  end
+end
+
+def minimal_tree(array)
+  return array if array.length < 2
+  
+  mid = array.length / 2
+  tree = TreeNode.new(array[mid])
+  tree.left = minimal_tree(array[0...mid])
+  tree.right = minimal_tree(array[mid + 1..-1])
+
+  tree
+end
