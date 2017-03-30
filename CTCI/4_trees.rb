@@ -162,6 +162,7 @@ def add_to_list(lists, root, depth)
     lists[depth] = LinkedList.new
   end
 
+  lists[depth].append(root)
   add_to_list(lists, root.left, depth - 1) if root.left
   add_to_list(lists, root.right, depth - 1) if root.right
 end
