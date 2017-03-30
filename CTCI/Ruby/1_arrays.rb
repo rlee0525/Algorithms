@@ -64,13 +64,17 @@ class QuickSort
   end
 end
 
-
 # Time O(N log N)
 # Space O(1)
 def is_unique3(str)
-  str = QuickSort.new(str)
+  str = QuickSort.new(str).sort
 
-  str.sort
+  (0...str.length - 1).each do |i|
+    return false if str[i] == str[i + 1]
+  end
+
+  true
 end
 
-p is_unique3("hello")
+p is_unique3("hello") == false
+p is_unique3("hiewqklm") == true
