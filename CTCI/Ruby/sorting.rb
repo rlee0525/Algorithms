@@ -19,12 +19,12 @@ end
 
 p bubble_sort([1, 2, 45, 1, 3, 4, 7, 2, 1, 100, 312])
 
-def merge_sort(array)
-  return array if array.length < 2
+def merge_sort(arr)
+  return arr if arr.length < 2
 
-  mid = array.length / 2
-  left = merge_sort(array[0...mid])
-  right = merge_sort(array[mid..-1])
+  mid = arr.length / 2
+  left = merge_sort(arr[0...mid])
+  right = merge_sort(arr[mid..-1])
 
   merge(left, right)
 end
@@ -33,10 +33,10 @@ def merge(left, right)
   result = []
 
   until left.empty? || right.empty?
-    if left.first < right.first
-      result << left.shift
-    else
+    if left.first > right.first
       result << right.shift
+    else
+      result << left.shift
     end
   end
 
