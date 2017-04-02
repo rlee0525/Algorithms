@@ -11,3 +11,8 @@ def bubble_sort(array):
     return array
 
 print bubble_sort([1,2,45,1,3,4,7,2,1,100,312])
+
+def merge_sort(array):
+    if len(array) < 2:
+        return array
+    
