@@ -33,3 +33,27 @@ const isUnique2 = (string) => {
 
 console.log(isUnique2("hello") === false);
 console.log(isUnique2("helowpqi") === true);
+
+const isPermutation = (string1, string2) => {
+  if (string1.length != string2.length) {
+    return false;
+  }
+
+  count = {}
+
+  for (var i = 0; i < string1.length; i++) {
+    count[string1[i]] ? count[string1[i]]++ : count[string1[i]] = 1;
+    count[string2[i]] ? count[string2[i]]-- : count[string2[i]] = -1;
+  }
+
+  for (key in count) {
+    if (count[key] !== 0) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+console.log(isPermutation("hello", "olehl") == true);
+console.log(isPermutation("heewewello", "oqwqlehl") == false);
