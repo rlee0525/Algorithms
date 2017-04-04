@@ -199,66 +199,68 @@
 
 # Time O(N)
 # Space O(N)
-def one_away(str1, str2)
-  return true if str1 == str2
-  return false if (str1.length - str2.length).abs > 1
-
-  difference = 0
-
-  if str1.length == str2.length
-    (0...str1.length).each do |i|
-      difference += 1 if str1[i] != str2[i]
-      return false if difference > 1
-    end
-  else
-    shorter = str1.length < str2.length ? str1 : str2
-    longer = str1.length > str2.length ? str1 : str2
-    idx1 = 0
-    idx2 = 0
-    while idx1 < longer.length && idx2 < shorter.length
-      if longer[idx1] != shorter[idx2]
-        return false if idx1 != idx2
-      else
-        idx2 += 1
-      end
-
-      idx1 += 1
-    end
-  end
-
-  true
-end
-
-p one_away("pale", "ple") == true
-p one_away("pales", "pale") == true
-p one_away("pale", "bale") == true
-p one_away("pale", "bae") == false
+# def one_away(str1, str2)
+#   return true if str1 == str2
+#   return false if (str1.length - str2.length).abs > 1
+#
+#   difference = 0
+#
+#   if str1.length == str2.length
+#     (0...str1.length).each do |i|
+#       difference += 1 if str1[i] != str2[i]
+#       return false if difference > 1
+#     end
+#   else
+#     shorter = str1.length < str2.length ? str1 : str2
+#     longer = str1.length > str2.length ? str1 : str2
+#     idx1 = 0
+#     idx2 = 0
+#     while idx1 < longer.length && idx2 < shorter.length
+#       if longer[idx1] != shorter[idx2]
+#         return false if idx1 != idx2
+#       else
+#         idx2 += 1
+#       end
+#
+#       idx1 += 1
+#     end
+#   end
+#
+#   true
+# end
+#
+# p one_away("pale", "ple") == true
+# p one_away("pales", "pale") == true
+# p one_away("pale", "bale") == true
+# p one_away("pale", "bae") == false
 
 # ------------------------------------------------------------------------------------------------
 
 # Time O(N)
 # Space O(N)
-def string_compression(str)
-  compressed = str[0]
-  count = 1
+# def string_compression(str)
+#   compressed = str[0]
+#   count = 1
+#
+#   (1...str.length).each do |idx|
+#     if str[idx] != compressed[-1]
+#       compressed += count.to_s
+#       compressed += str[idx]
+#       count = 1
+#     else
+#       count += 1
+#     end
+#
+#     if idx == str.length - 1
+#       compressed += count.to_s
+#     end
+#   end
+#
+#   compressed.length < str.length ? compressed : str
+# end
+#
+# p string_compression("aabcccccaaa") == "a2b1c5a3"
+# p string_compression("aabccccca") == "a2b1c5a1"
+# p string_compression("aabbcc") == "aabbcc"
 
-  (1...str.length).each do |idx|
-    if str[idx] != compressed[-1]
-      compressed += count.to_s
-      compressed += str[idx]
-      count = 1
-    else
-      count += 1
-    end
-
-    if idx == str.length - 1
-      compressed += count.to_s
-    end
-  end
-
-  compressed.length < str.length ? compressed : str
-end
-
-p string_compression("aabcccccaaa") == "a2b1c5a3"
-p string_compression("aabccccca") == "a2b1c5a1"
-p string_compression("aabbcc") == "aabbcc"
+# ------------------------------------------------------------------------------------------------
