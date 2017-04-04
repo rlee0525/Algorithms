@@ -49,3 +49,9 @@ print is_permutation2("hello", "olehl") == True
 print is_permutation2("heewewello", "oqwqlehl") == False
 
 # ---------------------------------------------------------------------
+
+def URLify(string):
+    string = string.strip()
+    return string.replace(" ", "%20")
+
+print URLify("Mr John Smith       ") == "Mr%20John%20Smith"
