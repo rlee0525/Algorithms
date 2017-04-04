@@ -235,3 +235,30 @@ p one_away("pale", "bale") == true
 p one_away("pale", "bae") == false
 
 # ------------------------------------------------------------------------------------------------
+
+# Time O(N)
+# Space O(N)
+def string_compression(str)
+  compressed = str[0]
+  count = 1
+
+  (1...str.length).each do |idx|
+    if str[idx] != compressed[-1]
+      compressed += count.to_s
+      compressed += str[idx]
+      count = 1
+    else
+      count += 1
+    end
+
+    if idx == str.length - 1
+      compressed += count.to_s
+    end
+  end
+
+  compressed.length < str.length ? compressed : str
+end
+
+p string_compression("aabcccccaaa") == "a2b1c5a3"
+p string_compression("aabccccca") == "a2b1c5a1"
+p string_compression("aabbcc") == "aabbcc"
