@@ -57,3 +57,9 @@ const isPermutation = (string1, string2) => {
 
 console.log(isPermutation("hello", "olehl") == true);
 console.log(isPermutation("heewewello", "oqwqlehl") == false);
+
+const URLify = string => (
+  string.trim().replace(/ /g, "%20")
+)
+
+console.log(URLify("Mr John Smith       ") == "Mr%20John%20Smith");
