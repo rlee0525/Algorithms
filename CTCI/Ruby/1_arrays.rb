@@ -350,3 +350,14 @@
 
 # Time O(N)
 # Space O(N)
+def string_rotation(str1, str2)
+  is_substring(str1 + str1, str2)
+end
+
+def is_substring(str1, str2)
+  str1.include?(str2)
+end
+
+p is_substring("Hello", "olHle") == false
+p is_substring("Hello", "ello") == true
+p string_rotation("waterbottle", "erbottlewat") == true
