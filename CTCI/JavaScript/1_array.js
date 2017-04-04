@@ -157,33 +157,67 @@
 // console.log(oneEditAway("pale", "pa") === false);
 // console.log(oneEditAway("pale", "jal") === false);
 
-const stringCompression = string => {
-  let compressed = string[0];
-  let count = 1;
+// const stringCompression = string => {
+//   let compressed = string[0];
+//   let count = 1;
+//
+//   for (let i = 1; i < string.length; i++) {
+//     if (string[i] !== compressed[compressed.length - 1]) {
+//       let stringCount = count.toString();
+//       compressed = compressed.concat(stringCount);
+//       compressed = compressed.concat(string[i]);
+//       count = 1;
+//     } else {
+//       count++;
+//     }
+//
+//     if (i === string.length - 1) {
+//       let stringCount = count.toString();
+//       compressed = compressed.concat(stringCount);
+//     }
+//   }
+//
+//   if (compressed.length < string.length) {
+//     return compressed;
+//   } else {
+//     return string;
+//   }
+// }
+//
+// console.log(stringCompression("aabcccccaaa") == "a2b1c5a3");
+// console.log(stringCompression("aabccccca") == "a2b1c5a1");
+// console.log(stringCompression("aabbcc") == "aabbcc");
 
-  for (let i = 1; i < string.length; i++) {
-    if (string[i] !== compressed[compressed.length - 1]) {
-      let stringCount = count.toString();
-      compressed = compressed.concat(stringCount);
-      compressed = compressed.concat(string[i]);
-      count = 1;
-    } else {
-      count++;
-    }
+const rotateMatrix = (matrix) => {
+  for (let row = 0; row < matrix.length; row++) {
+    let col = row + 1;
 
-    if (i === string.length - 1) {
-      let stringCount = count.toString();
-      compressed = compressed.concat(stringCount);
+    while (col < matrix.length) {
+      let temp = matrix[row][col];
+
+      matrix[row][col] = matrix[col][row];
+      matrix[col][row] = temp;
+
+      col++;
     }
   }
 
-  if (compressed.length < string.length) {
-    return compressed;
-  } else {
-    return string;
+  for (let row = 0; row < matrix.length; row++) {
+    let start_col = 0;
+    let end_col = matrix.length - 1;
+
+    while (start_col < end_col) {
+      let temp = matrix[row][start_col];
+      matrix[row][start_col] = matrix[row][end_col];
+      matrix[row][end_col] = temp;
+
+      start_col++;
+      end_col--;
+    }
   }
+
+  return matrix;
 }
 
-console.log(stringCompression("aabcccccaaa") == "a2b1c5a3");
-console.log(stringCompression("aabccccca") == "a2b1c5a1");
-console.log(stringCompression("aabbcc") == "aabbcc");
+console.log(rotateMatrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])); // [ [ 7, 4, 1 ], [ 8, 5, 2 ], [ 9, 6, 3 ] ]);
+console.log(rotateMatrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])); // [[13, 9, 5, 1], [14, 10, 6, 2], [15, 11, 7, 3], [16, 12, 8, 4]]);
