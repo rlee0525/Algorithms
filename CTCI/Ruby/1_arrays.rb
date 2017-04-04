@@ -267,28 +267,57 @@
 
 # Time O(N^2)
 # Space O(1)
-def rotate_matrix(matrix)
+# def rotate_matrix(matrix)
+#   (0...matrix.length).each do |row|
+#     col = row + 1
+#     while col < matrix.length
+#       matrix[row][col], matrix[col][row] = matrix[col][row], matrix[row][col]
+#       col += 1
+#     end
+#   end
+#
+#   (0...matrix.length).each do |row|
+#     start_col = 0
+#     end_col = matrix.length - 1
+#
+#     while start_col < end_col
+#       matrix[row][start_col], matrix[row][end_col] = matrix[row][end_col], matrix[row][start_col]
+#       start_col += 1
+#       end_col -= 1
+#     end
+#   end
+#
+#   matrix
+# end
+#
+# p rotate_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
+# p rotate_matrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]) == [[13, 9, 5, 1], [14, 10, 6, 2], [15, 11, 7, 3], [16, 12, 8, 4]]
+
+# ------------------------------------------------------------------------------------------------
+
+# Time O(2N^2)
+# Space O(2N)
+def zero_matrix(matrix)
+  rows_zero = {}
+  cols_zero = {}
+
   (0...matrix.length).each do |row|
-    col = row + 1
-    while col < matrix.length
-      matrix[row][col], matrix[col][row] = matrix[col][row], matrix[row][col]
-      col += 1
+    (0...matrix[0].length).each do |col|
+      if matrix[row][col] == 0
+        rows_zero[row] = true
+        cols_zero[col] = true
+      end
     end
   end
 
   (0...matrix.length).each do |row|
-    start_col = 0
-    end_col = matrix.length - 1
-
-    while start_col < end_col
-      matrix[row][start_col], matrix[row][end_col] = matrix[row][end_col], matrix[row][start_col]
-      start_col += 1
-      end_col -= 1
+    (0...matrix[0].length).each do |col|
+      matrix[row][col] = 0 if rows_zero[row] || cols_zero[col]
     end
   end
 
   matrix
 end
 
-p rotate_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
-p rotate_matrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]) == [[13, 9, 5, 1], [14, 10, 6, 2], [15, 11, 7, 3], [16, 12, 8, 4]]
+p zero_matrix([[1, 2, 3], [4, 0, 6], [7, 8, 9]]) == [[1, 0, 3], [0, 0, 0], [7, 0, 9]]
+p zero_matrix([[2, 3, 4], [6, 7, 8], [10, 11, 12], [14, 15, 0]]) == [[2, 3, 0], [6, 7, 0], [10, 11, 0], [0, 0, 0]]
