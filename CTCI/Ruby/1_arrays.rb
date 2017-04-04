@@ -165,10 +165,32 @@
 
 # Time O(N)
 # Space O(1)
-def URLify(string)
-  string.strip.gsub(" ", "%20")
-end
-
-p URLify("Mr John Smith       ") == "Mr%20John%20Smith"
+# def URLify(string)
+#   string.strip.gsub(" ", "%20")
+# end
+#
+# p URLify("Mr John Smith       ") == "Mr%20John%20Smith"
 
 # ------------------------------------------------------------------------------------------------
+
+# Time O(N)
+# Space O(N)
+def palindrome_perm(str)
+  count = Hash.new(0)
+
+  str.chars.each do |char|
+    count[char] += 1
+  end
+
+  odd_num = 0
+
+  count.each do |_, v|
+    odd_num += 1 if v.odd?
+    return false if odd_num > 1
+  end
+
+  true
+end
+
+p palindrome_perm("tactcoa") == true
+p palindrome_perm("tactcoza") == false
