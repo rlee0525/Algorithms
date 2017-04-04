@@ -18,7 +18,7 @@ class QuickSort
 
   def partition(left_index, right_index, pivot_index)
     pivot_value = string[pivot_index]
-    string[pivot_value], string[right_index] = string[right_index], string[pivot_value]
+    string[pivot_index], string[right_index] = string[right_index], string[pivot_index]
     new_pivot_index = left_index
 
     (left_index...right_index).each do |idx|
