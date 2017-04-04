@@ -78,3 +78,46 @@ def palindrome_perm(string):
 
 print palindrome_perm("tactcoa") == True
 print palindrome_perm("tactcoza") == False
+
+# ---------------------------------------------------------------------
+
+def one_away(str1, str2):
+    if (str1 == str2):
+        return True
+    if (abs(len(str1) - len(str2)) > 1):
+        return False
+
+    difference = 0
+
+    if (len(str1) == len(str2)):
+        idx = 0
+        while idx < len(str1):
+            if (str1[idx] != str2[idx]):
+                difference += 1
+                if difference > 1:
+                    return False
+            idx += 1
+    else:
+        shorter = str1 if len(str1) < len(str2) else str2
+        longer = str1 if shorter == str2 else str2
+        idx1 = 0
+        idx2 = 0
+
+        while (idx1 < len(shorter) and idx2 < len(longer)):
+            if shorter[idx1] != longer[idx2]:
+                if idx1 != idx2:
+                    return False
+            else:
+                idx1 += 1
+
+            idx2 += 1
+
+    return True
+
+print one_away("pale", "ple") == True
+print one_away("pales", "pale") == True
+print one_away("pale", "bale") == True
+print one_away("pale", "bae") == False
+print one_away("pale", "pale") == True
+print one_away("pale", "pa") == False
+print one_away("pale", "jal") == False
