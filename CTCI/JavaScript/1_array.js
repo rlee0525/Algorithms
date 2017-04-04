@@ -1,28 +1,82 @@
-// Time Complexity O(N)
-// Space Complexity O(N)
-const isUnique = (string) => {
-  let set = new Set();
+// // Time Complexity O(N)
+// // Space Complexity O(N)
+// const isUnique = (string) => {
+//   let set = new Set();
+//
+//   for (let i = 0; i < string.length; i++) {
+//     if (set.has(string[i])) {
+//       return false;
+//     } else {
+//       set.add(string[i]);
+//     }
+//   }
+//
+//   return true;
+// }
+//
+// console.log(isUnique("hello") === false);
+// console.log(isUnique("helowpqi") === true);
+//
+// // Time Complexity O(N^2)
+// // Space Complexity O(1)
+// const isUnique2 = (string) => {
+//   for (let i = 0; i < string.length; i++) {
+//     for (var j = i + 1; j < string.length; j++) {
+//       if (string[i] === string[j]) {
+//         return false;
+//       }
+//     }
+//   }
+//
+//   return true;
+// }
+//
+// console.log(isUnique2("hello") === false);
+// console.log(isUnique2("helowpqi") === true);
+//
+// const isPermutation = (string1, string2) => {
+//   if (string1.length != string2.length) {
+//     return false;
+//   }
+//
+//   count = {}
+//
+//   for (var i = 0; i < string1.length; i++) {
+//     count[string1[i]] ? count[string1[i]]++ : count[string1[i]] = 1;
+//     count[string2[i]] ? count[string2[i]]-- : count[string2[i]] = -1;
+//   }
+//
+//   for (key in count) {
+//     if (count[key] !== 0) {
+//       return false;
+//     }
+//   }
+//
+//   return true;
+// }
+//
+// console.log(isPermutation("hello", "olehl") == true);
+// console.log(isPermutation("heewewello", "oqwqlehl") == false);
+//
+// const URLify = string => (
+//   string.trim().replace(/ /g, "%20")
+// )
+//
+// console.log(URLify("Mr John Smith       ") == "Mr%20John%20Smith");
 
-  for (let i = 0; i < string.length; i++) {
-    if (set.has(string[i])) {
-      return false;
-    } else {
-      set.add(string[i]);
-    }
+const palindromePermutation = string => {
+  let count = {};
+
+  for (var i = 0; i < string.length; i++) {
+    count[string[i]] ? count[string[i]]++ : count[string[i]] = 1;
   }
 
-  return true;
-}
+  let oddCount = 0;
 
-console.log(isUnique("hello") === false);
-console.log(isUnique("helowpqi") === true);
-
-// Time Complexity O(N^2)
-// Space Complexity O(1)
-const isUnique2 = (string) => {
-  for (let i = 0; i < string.length; i++) {
-    for (var j = i + 1; j < string.length; j++) {
-      if (string[i] === string[j]) {
+  for (key in count) {
+    if (count[key] % 2 === 1) {
+      oddCount++;
+      if (oddCount > 1) {
         return false;
       }
     }
@@ -31,35 +85,5 @@ const isUnique2 = (string) => {
   return true;
 }
 
-console.log(isUnique2("hello") === false);
-console.log(isUnique2("helowpqi") === true);
-
-const isPermutation = (string1, string2) => {
-  if (string1.length != string2.length) {
-    return false;
-  }
-
-  count = {}
-
-  for (var i = 0; i < string1.length; i++) {
-    count[string1[i]] ? count[string1[i]]++ : count[string1[i]] = 1;
-    count[string2[i]] ? count[string2[i]]-- : count[string2[i]] = -1;
-  }
-
-  for (key in count) {
-    if (count[key] !== 0) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-console.log(isPermutation("hello", "olehl") == true);
-console.log(isPermutation("heewewello", "oqwqlehl") == false);
-
-const URLify = string => (
-  string.trim().replace(/ /g, "%20")
-)
-
-console.log(URLify("Mr John Smith       ") == "Mr%20John%20Smith");
+console.log(palindromePermutation("tacoatc") == true);
+console.log(palindromePermutation("tacoatcz") == false);

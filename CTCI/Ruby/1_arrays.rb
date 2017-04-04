@@ -194,3 +194,5 @@ end
 
 p palindrome_perm("tactcoa") == true
 p palindrome_perm("tactcoza") == false
+
+# ------------------------------------------------------------------------------------------------
