@@ -295,53 +295,58 @@
 
 # ------------------------------------------------------------------------------------------------
 
-# Time O(2N^2)
-# Space O(2N)
-def zero_matrix(matrix)
-  rows_zero = {}
-  cols_zero = {}
+# # Time O(2N^2)
+# # Space O(2N)
+# def zero_matrix(matrix)
+#   rows_zero = {}
+#   cols_zero = {}
+#
+#   (0...matrix.length).each do |row|
+#     (0...matrix[0].length).each do |col|
+#       if matrix[row][col] == 0
+#         rows_zero[row] = true
+#         cols_zero[col] = true
+#       end
+#     end
+#   end
+#
+#   (0...matrix.length).each do |row|
+#     (0...matrix[0].length).each do |col|
+#       matrix[row][col] = 0 if rows_zero[row] || cols_zero[col]
+#     end
+#   end
+#
+#   matrix
+# end
+#
+# p zero_matrix([[1, 2, 3], [4, 0, 6], [7, 8, 9]]) == [[1, 0, 3], [0, 0, 0], [7, 0, 9]]
+# p zero_matrix([[2, 3, 4], [6, 7, 8], [10, 11, 12], [14, 15, 0]]) == [[2, 3, 0], [6, 7, 0], [10, 11, 0], [0, 0, 0]]
+#
+# # Time O(2N^2)
+# # Space O(1)
+# def zero_matrix2(matrix)
+#   (0...matrix.length).each do |row|
+#     (0...matrix[0].length).each do |col|
+#       if matrix[row][col] == 0
+#         matrix[0][col] = 0
+#         matrix[row][0] = 0
+#       end
+#     end
+#   end
+#
+#   (1...matrix.length).each do |row|
+#     (1...matrix[0].length).each do |col|
+#       matrix[row][col] = 0 if matrix[0][col] == 0 || matrix[row][0] == 0
+#     end
+#   end
+#
+#   matrix
+# end
+#
+# p zero_matrix2([[1, 2, 3], [4, 0, 6], [7, 8, 9]]) == [[1, 0, 3], [0, 0, 0], [7, 0, 9]]
+# p zero_matrix2([[2, 3, 4], [6, 7, 8], [10, 11, 12], [14, 15, 0]]) == [[2, 3, 0], [6, 7, 0], [10, 11, 0], [0, 0, 0]]
 
-  (0...matrix.length).each do |row|
-    (0...matrix[0].length).each do |col|
-      if matrix[row][col] == 0
-        rows_zero[row] = true
-        cols_zero[col] = true
-      end
-    end
-  end
+# ------------------------------------------------------------------------------------------------
 
-  (0...matrix.length).each do |row|
-    (0...matrix[0].length).each do |col|
-      matrix[row][col] = 0 if rows_zero[row] || cols_zero[col]
-    end
-  end
-
-  matrix
-end
-
-p zero_matrix([[1, 2, 3], [4, 0, 6], [7, 8, 9]]) == [[1, 0, 3], [0, 0, 0], [7, 0, 9]]
-p zero_matrix([[2, 3, 4], [6, 7, 8], [10, 11, 12], [14, 15, 0]]) == [[2, 3, 0], [6, 7, 0], [10, 11, 0], [0, 0, 0]]
-
-# Time O(2N^2)
-# Space O(1)
-def zero_matrix2(matrix)
-  (0...matrix.length).each do |row|
-    (0...matrix[0].length).each do |col|
-      if matrix[row][col] == 0
-        matrix[0][col] = 0
-        matrix[row][0] = 0
-      end
-    end
-  end
-
-  (1...matrix.length).each do |row|
-    (1...matrix[0].length).each do |col|
-      matrix[row][col] = 0 if matrix[0][col] == 0 || matrix[row][0] == 0
-    end
-  end
-
-  matrix
-end
-
-p zero_matrix2([[1, 2, 3], [4, 0, 6], [7, 8, 9]]) == [[1, 0, 3], [0, 0, 0], [7, 0, 9]]
-p zero_matrix2([[2, 3, 4], [6, 7, 8], [10, 11, 12], [14, 15, 0]]) == [[2, 3, 0], [6, 7, 0], [10, 11, 0], [0, 0, 0]]
+# Time O(N)
+# Space O(N)

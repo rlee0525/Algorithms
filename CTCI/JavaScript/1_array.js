@@ -188,36 +188,60 @@
 // console.log(stringCompression("aabccccca") == "a2b1c5a1");
 // console.log(stringCompression("aabbcc") == "aabbcc");
 
-const rotateMatrix = (matrix) => {
+// const rotateMatrix = (matrix) => {
+//   for (let row = 0; row < matrix.length; row++) {
+//     let col = row + 1;
+//
+//     while (col < matrix.length) {
+//       let temp = matrix[row][col];
+//
+//       matrix[row][col] = matrix[col][row];
+//       matrix[col][row] = temp;
+//
+//       col++;
+//     }
+//   }
+//
+//   for (let row = 0; row < matrix.length; row++) {
+//     let start_col = 0;
+//     let end_col = matrix.length - 1;
+//
+//     while (start_col < end_col) {
+//       let temp = matrix[row][start_col];
+//       matrix[row][start_col] = matrix[row][end_col];
+//       matrix[row][end_col] = temp;
+//
+//       start_col++;
+//       end_col--;
+//     }
+//   }
+//
+//   return matrix;
+// }
+//
+// console.log(rotateMatrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])); // [ [ 7, 4, 1 ], [ 8, 5, 2 ], [ 9, 6, 3 ] ]);
+// console.log(rotateMatrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])); // [[13, 9, 5, 1], [14, 10, 6, 2], [15, 11, 7, 3], [16, 12, 8, 4]]);
+
+const zeroMatrix = matrix => {
   for (let row = 0; row < matrix.length; row++) {
-    let col = row + 1;
-
-    while (col < matrix.length) {
-      let temp = matrix[row][col];
-
-      matrix[row][col] = matrix[col][row];
-      matrix[col][row] = temp;
-
-      col++;
+    for (let col = 0; col < matrix[0].length; col++) {
+      if (matrix[row][col] === 0) {
+        matrix[row][0] = 0;
+        matrix[0][col] = 0;
+      }
     }
   }
 
-  for (let row = 0; row < matrix.length; row++) {
-    let start_col = 0;
-    let end_col = matrix.length - 1;
-
-    while (start_col < end_col) {
-      let temp = matrix[row][start_col];
-      matrix[row][start_col] = matrix[row][end_col];
-      matrix[row][end_col] = temp;
-
-      start_col++;
-      end_col--;
+  for (let row = 1; row < matrix.length; row++) {
+    for (let col = 1; col < matrix[0].length; col++) {
+      if (matrix[row][0] === 0 || matrix[0][col] === 0) {
+        matrix[row][col] = 0;
+      }
     }
   }
 
-  return matrix;
+  return matrix
 }
 
-console.log(rotateMatrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])); // [ [ 7, 4, 1 ], [ 8, 5, 2 ], [ 9, 6, 3 ] ]);
-console.log(rotateMatrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]])); // [[13, 9, 5, 1], [14, 10, 6, 2], [15, 11, 7, 3], [16, 12, 8, 4]]);
+console.log(zeroMatrix([[1, 2, 3], [4, 0, 6], [7, 8, 9]])); //== [[1, 0, 3], [0, 0, 0], [7, 0, 9]]);
+console.log(zeroMatrix([[2, 3, 4], [6, 7, 8], [10, 11, 12], [14, 15, 0]])); //== [[2, 3, 0], [6, 7, 0], [10, 11, 0], [0, 0, 0]]);
