@@ -63,20 +63,64 @@
 // )
 //
 // console.log(URLify("Mr John Smith       ") == "Mr%20John%20Smith");
+//
+// const palindromePermutation = string => {
+//   let count = {};
+//
+//   for (var i = 0; i < string.length; i++) {
+//     count[string[i]] ? count[string[i]]++ : count[string[i]] = 1;
+//   }
+//
+//   let oddCount = 0;
+//
+//   for (key in count) {
+//     if (count[key] % 2 === 1) {
+//       oddCount++;
+//       if (oddCount > 1) {
+//         return false;
+//       }
+//     }
+//   }
+//
+//   return true;
+// }
+//
+// console.log(palindromePermutation("tacoatc") == true);
+// console.log(palindromePermutation("tacoatcz") == false);
+//
 
-const palindromePermutation = string => {
-  let count = {};
-
-  for (var i = 0; i < string.length; i++) {
-    count[string[i]] ? count[string[i]]++ : count[string[i]] = 1;
+const oneEditAway = (str1, str2) => {
+  if (str1 === str2) {
+    return true;
   }
 
-  let oddCount = 0;
+  if (Math.abs(str1.length - str2.length) > 1) {
+    return false;
+  }
 
-  for (key in count) {
-    if (count[key] % 2 === 1) {
-      oddCount++;
-      if (oddCount > 1) {
+  if (str1.length == str2.length) {
+    return sameLength(str1, str2);
+  } else {
+    let shorter;
+    let longer;
+
+    if (str1.length < str2.length) {
+      shorter = str1;
+      longer = str2;
+    } else {
+      shorter = str2;
+      longer = str1;
+    }
+    return differentLength(longer, shorter);
+  }
+}
+
+const sameLength = (str1, str2) => {
+  let difference = 0;
+  for (var i = 0; i < str1.length; i++) {
+    if (str1[i] != str2[i]) {
+      difference++;
+      if (difference > 1) {
         return false;
       }
     }
@@ -85,5 +129,30 @@ const palindromePermutation = string => {
   return true;
 }
 
-console.log(palindromePermutation("tacoatc") == true);
-console.log(palindromePermutation("tacoatcz") == false);
+const differentLength = (longer, shorter) => {
+  let idx1 = 0;
+  let idx2 = 0;
+
+  while (idx1 < longer.length && idx2 < shorter.length) {
+    if (longer[idx1] !== shorter[idx2]) {
+      if (idx1 !== idx2) {
+        return false;
+      }
+
+      idx1++;
+      continue;
+    }
+    idx1++;
+    idx2++;
+  }
+
+  return true;
+}
+
+console.log(oneEditAway("pale", "ple") === true);
+console.log(oneEditAway("pales", "pale") === true);
+console.log(oneEditAway("pale", "bale") === true);
+console.log(oneEditAway("pale", "bae") === false);
+console.log(oneEditAway("pale", "pale") === true);
+console.log(oneEditAway("pale", "pa") === false);
+console.log(oneEditAway("pale", "jal") === false);
