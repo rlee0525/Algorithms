@@ -55,3 +55,26 @@ def URLify(string):
     return string.replace(" ", "%20")
 
 print URLify("Mr John Smith       ") == "Mr%20John%20Smith"
+
+# ---------------------------------------------------------------------
+
+def palindrome_perm(string):
+    count = {}
+    for c in string:
+        if (c in count):
+            count[c] += 1
+        else:
+            count[c] = 1
+
+    difference = 0
+
+    for key in count:
+        if (count[key] % 2 != 0):
+            difference += 1
+            if (difference > 1):
+                return False
+
+    return True
+
+print palindrome_perm("tactcoa") == True
+print palindrome_perm("tactcoza") == False
