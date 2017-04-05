@@ -26,6 +26,26 @@ class LinkedList
 
     link
   end
+
+  def each
+    current_link = @head
+
+    until current_link.next == @tail
+      yield current_link
+      current_link = current_link.next
+    end
+  end
+
+  def to_s
+    value = ""
+
+    self.each do |link|
+      value += link.value.to_s if link.value != nil
+    end
+
+    value
+  end
+
 end
 
 a = Link.new(5)
@@ -37,7 +57,7 @@ duplicated_list = LinkedList.new
 # duplicated_list.append(a)
 duplicated_list.append(b)
 duplicated_list.append(b)
-# duplicated_list.append(c)
+duplicated_list.append(c)
 # duplicated_list.append(d)
 
 unsorted_list = LinkedList.new
@@ -50,8 +70,8 @@ def remove_dups(list)
   seen = {}
   new_list = LinkedList.new
 
-  current_link = list.head
-  p current_link
+  current_link = list.head.next
+  current_link
 
   until current_link.value == list.tail.value
     if !seen[current_link.value]
@@ -62,8 +82,8 @@ def remove_dups(list)
     current_link = current_link.next
   end
 
-  new_list
+  new_list.to_s
 end
 
 p remove_dups(duplicated_list)
-# p unsorted_list
+p unsorted_list.to_s
