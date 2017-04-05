@@ -28,6 +28,16 @@ Usual Steps for companies with operational issues:
 ##### NoSQL taxonomy supports key-value stores, document store, BigTable, and graph databases
 ##### NoSQL => non-relational, distributed, open-source and horizontally scalable
 
+## Reasons To Use A NoSQL DB
+
+#### Storing large volumes of data that often have little to no structure.
+- A NoSQL database sets no limits on the types of data you can store together, and allows you to add different new types as your needs change. With document-based databases, you can store data in one place without having to define what “types” of data those are in advance.
+
+#### Making the most of cloud computing and storage.
+- Cloud-based storage is an excellent cost-saving solution, but requires data to be easily spread across multiple servers to scale up. Using commodity (affordable, smaller) hardware on-site or in the cloud saves you the hassle of additional software, and NoSQL databases like Cassandra are designed to be scaled across multiple data centers out of the box without a lot of headaches.
+
+#### Rapid development.
+- If you’re developing within two-week Agile sprints, cranking out quick iterations, or needing to make frequent updates to the data structure without a lot of downtime between versions, a relational database will slow you down. NoSQL data doesn’t need to be prepped ahead of time.
 
 # Row Store and Column Store Databases
 
@@ -72,3 +82,20 @@ Usual Steps for companies with operational issues:
 - ex) user transactions, sensor data, customer profiles (all the information that may be updated rapidly)
 
 ##### Fast read / write using NoSQL on one cluster and using Hadoop for large scale analytics.
+
+# Common Types of NoSQL DB
+#### Key-value model
+- the least complex NoSQL option, which stores data in a schema-less way that consists of indexed keys and values.
+###### Examples: Cassandra, Azure, LevelDB, and Riak.
+
+#### Column store
+- wide-column store, which stores data tables as columns rather than rows. It’s more than just an inverted table—sectioning out columns allows for excellent scalability and high performance.
+###### Examples: HBase, BigTable, HyperTable.
+
+#### Document database
+- taking the key-value concept and adding more complexity, each document in this type of database has its own data, and its own unique key, which is used to retrieve it. It’s a great option for storing, retrieving and managing data that’s document-oriented but still somewhat structured.
+###### Examples: MongoDB, CouchDB.
+
+#### Graph database
+- have data that’s interconnected and best represented as a graph? This method is capable of lots of complexity.
+###### Examples: Polyglot, Neo4J.
