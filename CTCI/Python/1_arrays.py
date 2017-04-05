@@ -147,3 +147,29 @@ print string_compression("aabccccca") == "a2b1c5a1"
 print string_compression("aabbcc") == "aabbcc"
 
 # ---------------------------------------------------------------------
+
+def rotate_matrix(matrix):
+    row = 0
+    while row < len(matrix):
+        col = row + 1
+        while col < len(matrix):
+            matrix[row][col], matrix[col][row] = matrix[col][row], matrix[row][col]
+            col += 1
+        row += 1
+
+    new_row = 0
+
+    while new_row < len(matrix):
+        start_col = 0
+        end_col = len(matrix) - 1
+
+        while start_col < end_col:
+            matrix[new_row][start_col], matrix[new_row][end_col] = matrix[new_row][end_col], matrix[new_row][start_col]
+            start_col += 1
+            end_col -= 1
+        new_row += 1
+
+    return matrix
+
+print rotate_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
+print rotate_matrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]) == [[13, 9, 5, 1], [14, 10, 6, 2], [15, 11, 7, 3], [16, 12, 8, 4]]
