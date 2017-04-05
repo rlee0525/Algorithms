@@ -173,3 +173,32 @@ def rotate_matrix(matrix):
 
 print rotate_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
 print rotate_matrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]) == [[13, 9, 5, 1], [14, 10, 6, 2], [15, 11, 7, 3], [16, 12, 8, 4]]
+
+# ---------------------------------------------------------------------
+
+def zero_matrix(matrix):
+    row = 0
+    while row < len(matrix):
+        col = 0
+        while col < len(matrix[0]):
+            if matrix[row][col] == 0:
+                matrix[row][0] = 0
+                matrix[0][col] = 0
+            col += 1
+        row += 1
+
+    row = 1
+    while row < len(matrix):
+        col = 1
+        while col < len(matrix[0]):
+            if matrix[0][col] == 0 or matrix[row][0] == 0:
+                matrix[row][col] = 0
+            col += 1
+        row += 1
+
+    return matrix
+
+print zero_matrix([[1, 2, 3], [4, 0, 6], [7, 8, 9]]) == [[1, 0, 3], [0, 0, 0], [7, 0, 9]]
+print zero_matrix([[2, 3, 4], [6, 7, 8], [10, 11, 12], [14, 15, 0]]) == [[2, 3, 0], [6, 7, 0], [10, 11, 0], [0, 0, 0]]
+
+# ---------------------------------------------------------------------
