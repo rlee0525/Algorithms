@@ -50,3 +50,25 @@ Usual Steps for companies with operational issues:
 ## Conclusion
 
 - Often, mixture of the two. The initial write is to a row-based system. Then, write the data (or the relevant parts of the data) to a column based database to allow for fast analytic queries.
+
+
+# Hadoop vs. NoSQL
+
+- Both came out as a way to handle Big Data
+- Incremental, horizontal scaling (scaling out)
+- Varying, changing data formats
+
+### Hadoop
+- batch-oriented
+- large-scale processing
+- massive compute power
+- big processing tasks on large volumes of data => works spread across many servers in parallel. Hadoop manages the process by using divide and conquer method known as map reduce. Process close to data so you are not accessing data across the network and thus slowing down the network.
+- ex) predictive analytics, fraud detection, and recommendation
+
+### NoSQL
+- real-time
+- interactive
+- fast reads / writes
+- ex) user transactions, sensor data, customer profiles (all the information that may be updated rapidly)
+
+##### Fast read / write using NoSQL on one cluster and using Hadoop for large scale analytics.
