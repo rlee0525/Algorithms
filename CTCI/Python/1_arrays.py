@@ -202,3 +202,16 @@ print zero_matrix([[1, 2, 3], [4, 0, 6], [7, 8, 9]]) == [[1, 0, 3], [0, 0, 0], [
 print zero_matrix([[2, 3, 4], [6, 7, 8], [10, 11, 12], [14, 15, 0]]) == [[2, 3, 0], [6, 7, 0], [10, 11, 0], [0, 0, 0]]
 
 # ---------------------------------------------------------------------
+
+def string_rotation(str1, str2):
+    new_string = str1 + str1
+    return is_substring(new_string, str2)
+
+def is_substring(str1, str2):
+    return str2 in str1
+
+print is_substring("Hello", "olHle") == False
+print is_substring("Hello", "ello") == True
+print string_rotation("waterbottle", "erbottlewat") == True
+
+# ---------------------------------------------------------------------
