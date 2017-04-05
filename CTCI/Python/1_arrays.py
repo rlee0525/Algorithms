@@ -121,3 +121,29 @@ print one_away("pale", "bae") == False
 print one_away("pale", "pale") == True
 print one_away("pale", "pa") == False
 print one_away("pale", "jal") == False
+
+# ---------------------------------------------------------------------
+
+def string_compression(string):
+    compressed = string[0]
+
+    idx = 1
+    count = 1
+    while idx < len(string):
+        if (string[idx] != compressed[-1]):
+            compressed += str(count)
+            compressed += string[idx]
+            count = 1
+        else:
+            count += 1
+        idx += 1
+
+    compressed += str(count)
+
+    return compressed if len(compressed) < len(string) else string
+
+print string_compression("aabcccccaaa") == "a2b1c5a3"
+print string_compression("aabccccca") == "a2b1c5a1"
+print string_compression("aabbcc") == "aabbcc"
+
+# ---------------------------------------------------------------------
