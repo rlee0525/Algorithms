@@ -1,4 +1,5 @@
 # HTTP (Hypertext Transfer Protocol)
+- The HTTP client and HTTP server exchange information about resources identified by URLs.
 
 ## What are HTTP headers?
 - HTTP headers allow the client and the server to pass additional information with the request or the response.
