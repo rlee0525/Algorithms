@@ -55,7 +55,7 @@
     - within shard, master slave replication exists
 - easy to undo: among the reasons why it's popular among startups
 
-### CDNS
+### CDNs
 - Giant data centers designed to send big files to users and to their ISPs as fast as possible - geographically closer (everywhere)
 - If you are front end is running slowly, you can use CDN! (such as JS, jQuery, Bootstrap, or CSS)
 - All the JS files will be concatenated together into a giant file to reduce to only one request. (This is why we use Webpack to do it!)

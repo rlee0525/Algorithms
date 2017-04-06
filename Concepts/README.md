@@ -1,5 +1,3 @@
-# Technical Concepts
+# Moved to a separate repo.
 
-- Architecture (The Basics)
-- Choosing Database (RDBMS vs. NOSQL)
-- What is HTTP?
+- https://github.com/rlee0525/TechnicalConceptsForInterviews
