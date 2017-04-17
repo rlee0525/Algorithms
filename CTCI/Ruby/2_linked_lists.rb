@@ -6,9 +6,4 @@ class Node
     @next = nil
     @prev = nil
   end
-
-  def append(node)
-    # while self.next 
-  end
-
 end
