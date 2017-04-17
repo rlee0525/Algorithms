@@ -84,7 +84,7 @@ p is_unique3("hiewqklm") == true
 # Time O(N log N + M log M)
 # Space O(1)
 def is_permutation(str1, str2)
-  str1.chars.sort.join == str2.chars.sort.join
+  str1.chars.sort == str2.chars.sort
 end
 
 p is_permutation("hello", "olehl") == true
@@ -204,24 +204,22 @@ p one_away("pale", "bae") == false
 # Time O(N)
 # Space O(N)
 def string_compression(str)
-  compressed = str[0]
+  compressed = string[0]
+
   count = 1
-
-  (1...str.length).each do |idx|
-    if str[idx] != compressed[-1]
-      compressed += count.to_s
-      compressed += str[idx]
-      count = 1
-    else
+  (1...string.length).each do |idx|
+    if string[idx] == compressed[-1]
       count += 1
-    end
-
-    if idx == str.length - 1
+    else
       compressed += count.to_s
+      compressed += string[idx]
+      count = 1
     end
   end
 
-  compressed.length < str.length ? compressed : str
+  compressed += count.to_s
+
+  compressed.length >= string.length ? string : compressed
 end
 
 p string_compression("aabcccccaaa") == "a2b1c5a3"
