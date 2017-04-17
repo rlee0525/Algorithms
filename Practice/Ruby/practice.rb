@@ -176,3 +176,63 @@ end
 p string_compression("aabcccccaaa") == "a2b1c5a3"
 p string_compression("aabccccca") == "a2b1c5a1"
 p string_compression("aabbcc") == "aabbcc"
+
+def rotate_matrix(matrix)
+  (0...matrix.length).each do |row|
+    col = 0
+    while col < row
+      matrix[row][col], matrix[col][row] = matrix[col][row], matrix[row][col]
+      col += 1
+    end
+  end
+
+  mid_line = matrix[0].length / 2
+
+  (0...matrix.length).each do |row|
+    col_end = matrix[0].length - 1
+    (0...mid_line).each do |col|
+      matrix[row][col], matrix[row][col_end - col] = matrix[row][col_end - col], matrix[row][col]
+    end
+  end
+
+  matrix
+end
+
+p rotate_matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]) == [[7, 4, 1], [8, 5, 2], [9, 6, 3]]
+p rotate_matrix([[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]) == [[13, 9, 5, 1], [14, 10, 6, 2], [15, 11, 7, 3], [16, 12, 8, 4]]
+
+def zero_matrix(matrix)
+  (0...matrix.length).each do |row|
+    (0...matrix[0].length).each do |col|
+      if matrix[row][col] == 0
+        matrix[0][col] = 0
+        matrix[row][0] = 0
+      end
+    end
+  end
+
+  (0...matrix.length).each do |row|
+    (0...matrix[0].length).each do |col|
+      if matrix[0][col] == 0 || matrix[row][0] == 0
+        matrix[row][col] = 0
+      end
+    end
+  end
+
+  matrix
+end
+
+p zero_matrix([[1, 2, 3], [4, 0, 6], [7, 8, 9]]) == [[1, 0, 3], [0, 0, 0], [7, 0, 9]]
+p zero_matrix([[2, 3, 4], [6, 7, 8], [10, 11, 12], [14, 15, 0]]) == [[2, 3, 0], [6, 7, 0], [10, 11, 0], [0, 0, 0]]
+
+def is_substring(str1, str2)
+  str1.include?(str2)
+end
+
+def string_rotation(str1, str2)
+  is_substring(str1 + str1, str2)
+end
+
+p is_substring("Hello", "olHle") == false
+p is_substring("Hello", "ello") == true
+p string_rotation("waterbottle", "erbottlewat") == true
