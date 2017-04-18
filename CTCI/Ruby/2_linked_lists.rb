@@ -64,6 +64,8 @@ a.append(h)
 
 # p a.values
 
+# Time O(N)
+# Space O(N)
 def remove_dups(linked_list)
   node = linked_list.head.next
   seen = {}
@@ -79,3 +81,34 @@ def remove_dups(linked_list)
 end
 
 p remove_dups(a).values == "(Node 0: 1) (Node 1: 11) (Node 2: 10) (Node 3: 5) (Node 4: 7) (Node 5: 3)"
+
+# Time O(N)
+# Space O(1)
+def kth_to_last(linked_list, k)
+  current_node = linked_list.head.next
+  kth_node = current_node
+
+  k.times do
+    kth_node = kth_node.next
+  end
+
+  until kth_node.next == @tail
+    current_node = current_node.next
+    kth_node = kth_node.next
+  end
+
+  current_node
+end
+
+p kth_to_last(a, 2).value == 7
+
+# Time O(1)
+# Space O(1)
+def delete_middle_node(node)
+  temp = node.prev
+  temp.next = node.next
+  node.next.prev = temp
+end
+
+delete_middle_node(d)
+p a.values == "(Node 0: 1) (Node 1: 11) (Node 2: 5) (Node 3: 7) (Node 4: 3)"
