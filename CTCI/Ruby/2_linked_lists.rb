@@ -272,3 +272,81 @@ end
 
 p is_palindrome2?(list1_sum_list) == false
 p is_palindrome2?(list3_sum_list) == true
+
+class SinglyLinkedList
+  attr_accessor :head, :tail
+
+  def initialize
+    @head = Node.new(nil)
+    @tail = Node.new(nil)
+    @head.next = @tail
+  end
+
+  def last_node
+    current_node = @head
+
+    until current_node.next == @tail
+      current_node = current_node.next
+    end
+
+    current_node
+  end
+
+  def append(node)
+    last_node.next = node
+    node.next = @tail
+  end
+end
+
+# Singly-linked lists!
+# Time O(N)
+# Space O(N)
+def intersection(list1, list2)
+  seen = {}
+
+  list1_current = list1.head.next
+  list2_current = list2.head.next
+
+  while list1_current.next.value || list2_current.next.value
+    return list1_current if seen[list1_current]
+    return list2_current if seen[list2_current]
+
+    seen[list1_current] = true
+    seen[list2_current] = true
+
+    list1_current = list1_current.next
+    list2_current = list2_current.next
+  end
+
+  false
+end
+
+single_list1 = SinglyLinkedList.new
+
+inter_node1 = Node.new(3)
+inter_node2 = Node.new(1)
+inter_node3 = Node.new(5)
+inter_node4 = Node.new(9)
+inter_node5 = Node.new(7)
+inter_node6 = Node.new(2)
+inter_node7 = Node.new(1)
+
+single_list1.append(inter_node1)
+single_list1.append(inter_node2)
+single_list1.append(inter_node3)
+single_list1.append(inter_node4)
+single_list1.append(inter_node5)
+single_list1.append(inter_node6)
+single_list1.append(inter_node7)
+
+single_list2 = SinglyLinkedList.new
+inter_node8 = Node.new(4)
+inter_node9 = Node.new(6)
+
+single_list2.append(inter_node8)
+single_list2.append(inter_node9)
+single_list2.append(inter_node5)
+single_list2.append(inter_node6)
+single_list2.append(inter_node7)
+
+p intersection(single_list1, single_list2) == inter_node5
