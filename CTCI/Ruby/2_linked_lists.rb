@@ -113,10 +113,9 @@ end
 delete_middle_node(d)
 p a.values == "(Node 0: 1) (Node 1: 11) (Node 2: 5) (Node 3: 7) (Node 4: 3)"
 
+# Time O(N)
+# Space O(N)
 def partition(linked_list, x)
-# all nodes less than x come before all nodes greater than or equal to x
-# if x is contained within the list, the values of x only need to
-# be after the elements less than x (anywhere in the right partition)
   left_partition = LinkedList.new
   right_partition = LinkedList.new
 
@@ -163,3 +162,49 @@ new_list.append(n6)
 new_list.append(n7)
 
 p partition(new_list, 5).values == "(Node 0: 3) (Node 1: 2) (Node 2: 1) (Node 3: 5) (Node 4: 8) (Node 5: 5) (Node 6: 10)"
+
+# Time O(N)
+# Space O(N)
+def sum_lists(list1, list2)
+  num = 0
+  factor = 1
+
+  list1_node = list1.head.next
+  list2_node = list2.head.next
+
+  while list1_node.value
+    num += (list1_node.value * factor)
+    num += (list2_node.value * factor)
+    list1_node = list1_node.next
+    list2_node = list2_node.next
+    factor *= 10
+  end
+
+  string_num = num.to_s
+  new_list = LinkedList.new
+
+  (string_num.length - 1).downto(0).each do |idx|
+    new_node = Node.new(string_num[idx].to_i)
+    new_list.append(new_node)
+  end
+
+  new_list
+end
+
+list1_sum_list = LinkedList.new
+list1a = Node.new(7)
+list1b = Node.new(1)
+list1c = Node.new(6)
+list1_sum_list.append(list1a)
+list1_sum_list.append(list1b)
+list1_sum_list.append(list1c)
+
+list2_sum_list = LinkedList.new
+list2a = Node.new(5)
+list2b = Node.new(9)
+list2c = Node.new(2)
+list2_sum_list.append(list2a)
+list2_sum_list.append(list2b)
+list2_sum_list.append(list2c)
+
+p sum_lists(list1_sum_list, list2_sum_list).values == "(Node 0: 2) (Node 1: 1) (Node 2: 9)"
