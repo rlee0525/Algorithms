@@ -28,8 +28,6 @@ class LinkedList
   def delete(node)
     node.prev.next = node.next
     node.next.prev = node.prev
-    node.next = nil
-    node.prev = nil
   end
 
   def values
@@ -54,6 +52,7 @@ d = Node.new(10)
 e = Node.new(5)
 f = Node.new(7)
 g = Node.new(3)
+h = Node.new(1)
 
 a.append(b)
 a.append(c)
@@ -61,6 +60,22 @@ a.append(d)
 a.append(e)
 a.append(f)
 a.append(g)
-a.delete(c)
+a.append(h)
 
-p a.values
+# p a.values
+
+def remove_dups(linked_list)
+  node = linked_list.head.next
+  seen = {}
+
+  until node == linked_list.tail
+    linked_list.delete(node) if seen[node.value]
+    seen[node.value] = true
+
+    node = node.next
+  end
+
+  linked_list
+end
+
+p remove_dups(a).values == "(Node 0: 1) (Node 1: 11) (Node 2: 10) (Node 3: 5) (Node 4: 7) (Node 5: 3)"
