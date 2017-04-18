@@ -35,7 +35,7 @@ class LinkedList
     node = @head.next
     count = 0
 
-    until node == @tail
+    while node.value
       string += "(Node #{count}: #{node.value}) "
       count += 1
       node = node.next
@@ -112,3 +112,54 @@ end
 
 delete_middle_node(d)
 p a.values == "(Node 0: 1) (Node 1: 11) (Node 2: 5) (Node 3: 7) (Node 4: 3)"
+
+def partition(linked_list, x)
+# all nodes less than x come before all nodes greater than or equal to x
+# if x is contained within the list, the values of x only need to
+# be after the elements less than x (anywhere in the right partition)
+  left_partition = LinkedList.new
+  right_partition = LinkedList.new
+
+  current_node = linked_list.head.next
+
+  until current_node == linked_list.tail
+    if current_node.value < x
+      next_node = current_node.next
+      linked_list.delete(current_node)
+      left_partition.append(current_node)
+    else
+      next_node = current_node.next
+      linked_list.delete(current_node)
+      right_partition.append(current_node)
+    end
+
+    current_node = next_node
+  end
+
+  right_head = right_partition.head.next
+  left_tail = left_partition.tail.prev
+
+  left_tail.next = right_head
+  right_head.prev = left_tail
+
+  left_partition
+end
+
+new_list = LinkedList.new
+n1 = Node.new(3)
+n2 = Node.new(5)
+n3 = Node.new(8)
+n4 = Node.new(5)
+n5 = Node.new(10)
+n6 = Node.new(2)
+n7 = Node.new(1)
+
+new_list.append(n1)
+new_list.append(n2)
+new_list.append(n3)
+new_list.append(n4)
+new_list.append(n5)
+new_list.append(n6)
+new_list.append(n7)
+
+p partition(new_list, 5).values == "(Node 0: 3) (Node 1: 2) (Node 2: 1) (Node 3: 5) (Node 4: 8) (Node 5: 5) (Node 6: 10)"
