@@ -208,3 +208,67 @@ list2_sum_list.append(list2b)
 list2_sum_list.append(list2c)
 
 p sum_lists(list1_sum_list, list2_sum_list).values == "(Node 0: 2) (Node 1: 1) (Node 2: 9)"
+
+# Doubly-linked list
+# Time O(N/2)
+# Space O(1)
+def is_palindrome?(linked_list)
+  first_node = linked_list.head
+  last_node = linked_list.tail
+
+  until first_node == last_node || first_node.prev == last_node
+    return false if first_node.value != last_node.value
+    first_node = first_node.next
+    last_node = last_node.prev
+  end
+
+  true
+end
+
+list3_sum_list = LinkedList.new
+list3a = Node.new(3)
+list3b = Node.new(9)
+list3c = Node.new(3)
+list3_sum_list.append(list3a)
+list3_sum_list.append(list3b)
+list3_sum_list.append(list3c)
+
+p is_palindrome?(list1_sum_list) == false
+p is_palindrome?(list3_sum_list) == true
+
+def is_palindrome2?(linked_list)
+  slow_runner = linked_list.head.next
+  fast_runner = linked_list.head.next
+
+  first_half = []
+  length = 0
+
+  while fast_runner.value
+    first_half << slow_runner
+    slow_runner = slow_runner.next
+
+    if fast_runner.next.value
+      fast_runner = fast_runner.next.next
+      length += 1
+    else
+      break
+    end
+  end
+
+  if length.odd?
+    (first_half.length - 2).downto(0).each do |idx|
+      return false if first_half[idx].value != slow_runner.value
+      slow_runner = slow_runner.next
+    end
+  else
+    (first_half.length - 1).downto(0).each do |idx|
+      return false if first_half[idx].value != slow_runner.value
+      slow_runner = slow_runner.next
+    end
+  end
+
+  true
+end
+
+p is_palindrome2?(list1_sum_list) == false
+p is_palindrome2?(list3_sum_list) == true
