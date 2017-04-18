@@ -350,3 +350,59 @@ single_list2.append(inter_node6)
 single_list2.append(inter_node7)
 
 p intersection(single_list1, single_list2) == inter_node5
+
+class CircularLinkedList
+  attr_accessor :head, :tail
+
+  def initialize
+    @head = Node.new(nil)
+  end
+
+  def last_node
+    current_node = @head
+
+    while current_node.next
+      current_node = current_node.next
+    end
+
+    current_node
+  end
+
+  def append(node)
+    last_node.next = node
+  end
+end
+
+def loop_detection(circular_list)
+  seen = {}
+
+  current_node = circular_list.head.next
+
+  until seen[current_node]
+    seen[current_node] = true
+    current_node = current_node.next
+  end
+
+  current_node
+end
+
+single_list5 = CircularLinkedList.new
+
+inter_node1 = Node.new(3)
+inter_node2 = Node.new(50)
+inter_node3 = Node.new(5)
+inter_node4 = Node.new(9)
+inter_node5 = Node.new(7)
+inter_node6 = Node.new(2)
+inter_node7 = Node.new(5)
+
+single_list5.append(inter_node1)
+single_list5.append(inter_node2)
+single_list5.append(inter_node3)
+single_list5.append(inter_node4)
+single_list5.append(inter_node5)
+single_list5.append(inter_node6)
+single_list5.append(inter_node7)
+single_list5.append(inter_node4)
+
+p loop_detection(single_list5) == inter_node4
