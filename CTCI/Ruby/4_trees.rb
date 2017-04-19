@@ -12,7 +12,7 @@ end
 class Edge
   attr_reader :to_vertex, :from_vertex, :weight
 
-  def initialize(to_vertex, from_vertex, weight = 1)
+  def initialize(from_vertex, to_vertex, weight = 1)
     @to_vertex = to_vertex
     @from_vertex = from_vertex
     @weight = weight
@@ -47,8 +47,9 @@ Edge.new(a, d)
 Edge.new(b, e)
 Edge.new(a, c)
 
-# Time
-# Space
+# Time O(N)
+# Space O(N)
+# BFS using queue!
 def route_nodes(start_vertex, end_vertex)
   return true if start_vertex == end_vertex
 
@@ -72,5 +73,26 @@ def route_nodes(start_vertex, end_vertex)
   false
 end
 
-p route_nodes(a, c) == false
-p route_nodes(c, a) == true
+p route_nodes(c, a) == false
+p route_nodes(a, c) == true
+
+# Time O(N)
+# Space O(N)
+# DFS using stack!
+def route_nodes_rec(start_vertex, end_vertex)
+  return true if start_vertex == end_vertex
+
+  visited ||= {}
+  visited[start_vertex] = true
+
+  start_vertex.out_edges.each do |edge|
+    unless visited[edge.to_vertex]
+      return true if route_nodes_rec(edge.to_vertex, end_vertex)
+    end
+  end
+
+  false
+end
+
+p route_nodes_rec(c, a) == false
+p route_nodes_rec(a, c) == true
