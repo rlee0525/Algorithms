@@ -96,3 +96,57 @@ end
 
 p route_nodes_rec(c, a) == false
 p route_nodes_rec(a, c) == true
+
+class Node
+  attr_accessor :value, :next, :prev
+
+  def initialize(value)
+    @value = value
+    @next = nil
+    @prev = nil
+  end
+end
+
+class Tree
+  attr_accessor :value, :left, :right
+
+  def initialize(value)
+    @value = value
+    @left = nil
+    @right = nil
+  end
+
+  def to_array
+    queue = [self]
+
+    array = []
+
+    until queue.empty?
+      current = queue.shift
+
+      if current
+        array << current.value
+        queue << current.left
+        queue << current.right
+      end
+    end
+
+    array
+  end
+end
+
+# Time O(N)
+# Space O(N)
+def minimal_tree(sorted_array)
+  return if sorted_array.empty?
+
+  mid = sorted_array.length / 2
+
+  tree = Tree.new(sorted_array[mid])
+  tree.left = minimal_tree(sorted_array[0...mid])
+  tree.right = minimal_tree(sorted_array[mid + 1...sorted_array.length])
+
+  tree
+end
+
+p minimal_tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).to_array == [6, 3, 9, 2, 5, 8, 10, 1, 4, 7]
