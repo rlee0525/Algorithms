@@ -4,7 +4,7 @@
 - Popular technical concepts for interviews summarized and sorted by topics (Moved to a separate repo)
 
 ## [Cracking The Coding Interview](/CTCI)
-- Solutions in Ruby, JavaScript, and Python
+- Solutions in Ruby, JavaScript, and Python with unit tests
 - Ruby solutions are updated first
 
 ## [LeetCode](/LeetCode)
