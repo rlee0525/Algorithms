@@ -97,16 +97,6 @@ end
 p route_nodes_rec(c, a) == false
 p route_nodes_rec(a, c) == true
 
-class Node
-  attr_accessor :value, :next, :prev
-
-  def initialize(value)
-    @value = value
-    @next = nil
-    @prev = nil
-  end
-end
-
 class Tree
   attr_accessor :value, :left, :right
 
@@ -150,3 +140,83 @@ def minimal_tree(sorted_array)
 end
 
 p minimal_tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).to_array == [6, 3, 9, 2, 5, 8, 10, 1, 4, 7]
+
+class Node
+  attr_accessor :value, :next, :prev
+
+  def initialize(value = nil)
+    @value = value
+    @next = nil
+    @prev = nil
+  end
+end
+
+class LinkedList
+  attr_accessor :head, :tail
+
+  def initialize
+    @head = Node.new
+    @tail = Node.new
+    @head.next = @tail
+    @tail.prev = @head
+  end
+
+  def append(node)
+    last_node = @tail.prev
+
+    last_node.next = node
+    node.prev = last_node
+    node.next = @tail
+    @tail.prev = node
+  end
+
+  def delete(node)
+    node.next.prev = node.prev
+    node.prev.next = node.next
+    node.next = nil
+    node.prev = nil
+  end
+
+  def display_values
+    string = ""
+
+    current_node = @head.next
+
+    while current_node != @tail
+      string += current_node.value.to_s
+      current_node = current_node.next
+    end
+
+    string
+  end
+end
+
+# Time O(N) - excluding the display part
+# Space O(N)
+def list_of_depths(tree)
+  lists = {}
+  add_to_list(lists, tree, 1)
+
+  display = []
+
+  lists.each do |_, list|
+    display << list.display_values
+  end
+
+  display
+end
+
+def add_to_list(lists, tree, depth)
+  if !lists[depth]
+    lists[depth] = LinkedList.new
+  end
+
+  lists[depth].append(Node.new(tree.value))
+
+  add_to_list(lists, tree.left, depth + 1) if tree.left
+  add_to_list(lists, tree.right, depth + 1) if tree.right
+end
+
+
+new_tree = minimal_tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+p list_of_depths(new_tree) == ["6", "39", "25810", "147"]
