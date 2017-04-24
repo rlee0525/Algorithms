@@ -220,3 +220,8 @@ end
 
 new_tree = minimal_tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 p list_of_depths(new_tree) == ["6", "39", "25810", "147"]
+
+
+def check_balanced(tree)
+  
+end
