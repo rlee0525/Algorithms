@@ -222,7 +222,7 @@ new_tree = minimal_tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 p list_of_depths(new_tree) == ["6", "39", "25810", "147"]
 
 def is_balanced?(tree)
-  check_balanced(tree)
+  check_balanced(tree) != false
 end
 
 def check_balanced(tree)
@@ -231,8 +231,8 @@ def check_balanced(tree)
   depth_left = check_balanced(tree.left)
   depth_right = check_balanced(tree.right)
 
-  return false if depth_left == false || depth_right == false
-  return false if (depth_right - depth_left).abs > 1
+  return false if depth_right == false || depth_left == false
+  return false if (depth_left - depth_right).abs > 1
 
   [depth_left, depth_right].max + 1
 end
@@ -242,6 +242,21 @@ bad_tree.left = Tree.new(3)
 bad_tree.left.left = Tree.new(2)
 bad_tree.left.left.left = Tree.new(1)
 bad_tree.right = Tree.new(9)
+bad_tree.right.left = Tree.new(10)
 
-# p is_balanced?(new_tree) == true
+p is_balanced?(new_tree) == true
 p is_balanced?(bad_tree) == false
+
+def is_bst?(tree)
+  valid_tree(tree, -Float::INFINITY, Float::INFINITY)
+end
+
+def valid_tree(tree, min, max)
+  return true unless tree
+  return false if tree.value <= min || tree.value > max
+
+  valid_tree(tree.left, min, tree.value) && valid_tree(tree.right, tree.value, max)
+end
+
+p is_bst?(new_tree) == true
+p is_bst?(bad_tree) == false
