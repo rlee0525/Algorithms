@@ -221,7 +221,27 @@ end
 new_tree = minimal_tree([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 p list_of_depths(new_tree) == ["6", "39", "25810", "147"]
 
+def is_balanced?(tree)
+  check_balanced(tree)
+end
 
 def check_balanced(tree)
-  
+  return -1 unless tree
+
+  depth_left = check_balanced(tree.left)
+  depth_right = check_balanced(tree.right)
+
+  return false if depth_left == false || depth_right == false
+  return false if (depth_right - depth_left).abs > 1
+
+  [depth_left, depth_right].max + 1
 end
+
+bad_tree = Tree.new(5)
+bad_tree.left = Tree.new(3)
+bad_tree.left.left = Tree.new(2)
+bad_tree.left.left.left = Tree.new(1)
+bad_tree.right = Tree.new(9)
+
+# p is_balanced?(new_tree) == true
+p is_balanced?(bad_tree) == false
