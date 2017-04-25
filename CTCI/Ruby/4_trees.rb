@@ -340,3 +340,14 @@ p successor(tree_a) == tree_b
 p successor(tree_i) == tree_j
 p successor(tree_g) == tree_h
 p successor(tree_f) == tree_g
+
+def build_order(projects, dependencies)
+
+end
+
+proj_arr = [a, b, c, d, e, f]
+depen_arr = [[a, d], [f, b], [b, d], [f, a], [d, c]]
+error_arr = [[a, d], [f, b], [d, a], [f, a], [d, c]]
+
+p build_order(proj_arr, depen_arr) == [f, e, a, b, d, c]
+p build_order(proj_arr, error_arr) == nil
