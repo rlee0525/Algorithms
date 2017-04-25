@@ -260,3 +260,83 @@ end
 
 p is_bst?(new_tree) == true
 p is_bst?(bad_tree) == false
+
+
+class ParentTree
+  attr_accessor :left, :right, :parent, :value
+
+  def initialize(value)
+    @value = value
+    @left = nil
+    @right = nil
+    @parent = nil
+  end
+end
+
+def successor(node)
+  if node.right
+    current = node.right
+    while current.left
+      current = current.left
+    end
+
+    current
+  elsif !node.parent && !node.right
+    nil
+  else
+    parent = node.parent
+
+    return parent if parent.left == node
+
+    while parent.right == node
+      return nil unless parent.parent
+
+      grand_parent = parent.parent
+
+      if grand_parent.left == parent
+        return grand_parent
+      else
+        parent = grand_parent
+      end
+
+      node = parent
+    end
+  end
+end
+
+tree_a = ParentTree.new(1)
+tree_b = ParentTree.new(2)
+tree_c = ParentTree.new(3)
+tree_d = ParentTree.new(4)
+tree_e = ParentTree.new(5)
+tree_f = ParentTree.new(6)
+tree_g = ParentTree.new(7)
+tree_h = ParentTree.new(8)
+tree_i = ParentTree.new(9)
+tree_j = ParentTree.new(10)
+
+test_tree = tree_f
+test_tree.left = tree_c
+tree_c.parent = tree_f
+test_tree.right = tree_i
+tree_i.parent = tree_f
+test_tree.left.left = tree_b
+tree_b.parent = tree_c
+test_tree.left.right = tree_e
+tree_e.parent = tree_c
+test_tree.right.left = tree_h
+tree_h.parent = tree_i
+test_tree.right.right = tree_j
+tree_j.parent = tree_i
+test_tree.left.left.left = tree_a
+tree_a.parent = tree_b
+test_tree.left.right.left = tree_d
+tree_d.parent = tree_e
+test_tree.right.left.left = tree_g
+tree_g.parent = tree_h
+
+p successor(tree_e) == tree_f
+p successor(tree_a) == tree_b
+p successor(tree_i) == tree_j
+p successor(tree_g) == tree_h
+p successor(tree_f) == tree_g
