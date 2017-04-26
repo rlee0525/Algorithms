@@ -352,7 +352,7 @@ def build_order(projects, dependencies)
     current = queue.shift
     if current.in_edges.empty?
       ordered << current
-      count -= 1
+      count = 0
       current.out_edges.each do |edge|
         return false if ordered.include?(edge.to_vertex)
         edge.to_vertex.in_edges.delete(edge)
