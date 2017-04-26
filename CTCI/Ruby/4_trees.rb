@@ -392,7 +392,52 @@ proj_arr = [aa, bb, cc, dd, ee, ff, gg]
 depen_arr = [[ff, cc], [ff, bb], [ff, aa], [bb, aa],
              [cc, aa], [bb, ee], [aa, ee], [dd, gg]]
 proj_arr2 = [hh, ii, jj, kk, ll]
-error_arr = [[hh, kk], [ll, ii], [kk, hh], [ll, hh], [kk, jj]]
+cyclic_arr = [[hh, kk], [ll, ii], [kk, hh], [ll, hh], [kk, jj]]
 
 p build_order(proj_arr, depen_arr) == [dd, ff, gg, bb, cc, aa, ee]
-p build_order(proj_arr2, error_arr) == false
+p build_order(proj_arr2, cyclic_arr) == false
+
+def build_order_dfs(projects, dependencies)
+  build_edges(dependencies)
+  ordered = []
+  visited = {}
+
+  projects.each do |project|
+    dfs(ordered, project, visited) unless visited[project]
+  end
+
+  ordered
+end
+
+def dfs(ordered, project, visited)
+  visited[project] = true
+
+  project.out_edges.each do |edge|
+    dfs(ordered, edge.to_vertex, visited)
+  end
+
+  ordered.unshift(project) unless ordered.include?(project)
+end
+
+aaa = Vertex.new("a")
+bbb = Vertex.new("b")
+ccc = Vertex.new("c")
+ddd = Vertex.new("d")
+eee = Vertex.new("e")
+fff = Vertex.new("f")
+ggg = Vertex.new("g")
+
+# hhh = Vertex.new("h")
+# iii = Vertex.new("i")
+# jjj = Vertex.new("j")
+# kkk = Vertex.new("k")
+# lll = Vertex.new("l")
+
+proj_arr3 = [aaa, bbb, ccc, ddd, eee, fff, ggg]
+depen_arr3 = [[fff, ccc], [fff, bbb], [fff, aaa], [bbb, aaa],
+              [ccc, aaa], [bbb, eee], [aaa, eee], [ddd, ggg]]
+# proj_arr4 = [hhh, iii, jjj, kkk, lll]
+# error_arr4 = [[hhh, kkk], [lll, iii], [kkk, hhh], [lll, hhh], [kkk, jjj]]
+
+p build_order_dfs(proj_arr3, depen_arr3) == [fff, ddd, ggg, ccc, bbb, aaa, eee]
+# p build_order_dfs(proj_arr4, error_arr4) == false
