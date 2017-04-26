@@ -453,6 +453,40 @@ class TreeNode
   end
 end
 
-def first_common_ancestor(node1, node2)
+fca_a = TreeNode.new(10)
+fca_b = TreeNode.new(8)
+fca_c = TreeNode.new(6)
+fca_d = TreeNode.new(2)
+fca_e = TreeNode.new(9)
+fca_f = TreeNode.new(12)
+fca_a.left = fca_b
+fca_b.parent = fca_a
+fca_a.right = fca_f
+fca_f.parent = fca_a
+fca_b.left = fca_c
+fca_c.parent = fca_b
+fca_b.right = fca_e
+fca_e.parent = fca_b
+fca_c.left = fca_d
+fca_d.parent = fca_c
 
+
+def first_common_ancestor(node1, node2)
+  visited = {}
+
+  while node1.parent
+    visited[node1.parent] = true
+    node1 = node1.parent
+  end
+
+  while node2.parent
+    return node2.parent if visited[node2.parent]
+    node2 = node2.parent
+  end
+
+  nil
 end
+
+p first_common_ancestor(fca_b, fca_c) == fca_a
+p first_common_ancestor(fca_d, fca_e) == fca_b
+p first_common_ancestor(fca_f, fca_d) == fca_a
