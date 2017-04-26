@@ -1,6 +1,6 @@
 # Graph
 class Vertex
-  attr_reader :in_edges, :out_edges, :value
+  attr_accessor :in_edges, :out_edges, :value
 
   def initialize(value)
     @value = value
@@ -342,12 +342,57 @@ p successor(tree_g) == tree_h
 p successor(tree_f) == tree_g
 
 def build_order(projects, dependencies)
+  build_edges(dependencies)
 
+  ordered = []
+  queue = projects
+  count = 0
+
+  until queue.empty?
+    current = queue.shift
+    if current.in_edges.empty?
+      ordered << current
+      count -= 1
+      current.out_edges.each do |edge|
+        return false if ordered.include?(edge.to_vertex)
+        edge.to_vertex.in_edges.delete(edge)
+      end
+    else
+      queue << current
+      count += 1
+
+      return false if count == queue.length
+    end
+  end
+
+  ordered
 end
 
-proj_arr = [a, b, c, d, e, f]
-depen_arr = [[a, d], [f, b], [b, d], [f, a], [d, c]]
-error_arr = [[a, d], [f, b], [d, a], [f, a], [d, c]]
+def build_edges(dependencies)
+  dependencies.each do |pair|
+    Edge.new(pair[0], pair[1])
+  end
+end
 
-p build_order(proj_arr, depen_arr) == [f, e, a, b, d, c]
-p build_order(proj_arr, error_arr) == nil
+aa = Vertex.new("a")
+bb = Vertex.new("b")
+cc = Vertex.new("c")
+dd = Vertex.new("d")
+ee = Vertex.new("e")
+ff = Vertex.new("f")
+gg = Vertex.new("g")
+
+hh = Vertex.new("h")
+ii = Vertex.new("i")
+jj = Vertex.new("j")
+kk = Vertex.new("k")
+ll = Vertex.new("l")
+
+proj_arr = [aa, bb, cc, dd, ee, ff, gg]
+depen_arr = [[ff, cc], [ff, bb], [ff, aa], [bb, aa],
+             [cc, aa], [bb, ee], [aa, ee], [dd, gg]]
+proj_arr2 = [hh, ii, jj, kk, ll]
+error_arr = [[hh, kk], [ll, ii], [kk, hh], [ll, hh], [kk, jj]]
+
+p build_order(proj_arr, depen_arr) == [dd, ff, gg, bb, cc, aa, ee]
+p build_order(proj_arr2, error_arr) == false
