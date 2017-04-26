@@ -441,3 +441,18 @@ depen_arr3 = [[fff, ccc], [fff, bbb], [fff, aaa], [bbb, aaa],
 
 p build_order_dfs(proj_arr3, depen_arr3) == [fff, ddd, ggg, ccc, bbb, aaa, eee]
 # p build_order_dfs(proj_arr4, error_arr4) == false
+
+class TreeNode
+  attr_accessor :value, :left, :right, :parent
+
+  def initialize(value)
+    @value = value
+    @left = nil
+    @right = nil
+    @parent = nil
+  end
+end
+
+def first_common_ancestor(node1, node2)
+
+end
