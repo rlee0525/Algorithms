@@ -41,10 +41,59 @@ p steal_houses_rec(houses1) == 1000101
 p steal_houses_rec(houses2) == 30
 p steal_houses_rec(houses3) == 760
 
-def steal_houses_rec_index(array, pos)
+# def steal_houses_rec_index(array, pos)
+#
+# end
+#
+# p steal_houses_rec_index(houses1, []) == [1, 4]
+# p steal_houses_rec_index(houses1, []) == [0, 2, 4]
+# p steal_houses_rec_index(houses1, []) == [0, 2, 4, 6, 9]
 
+
+# Given an expression string exp, examine whether the pairs
+# and the orders of “{“,”}”,”(“,”)”,”[“,”]” are correct in exp.
+# For example, the program should print 'balanced' for
+# exp = “[()]{}{[()()]()}” and 'not balanced' for exp = “[(])”
+
+def parenthesis_checker(string)
+  pairs = {
+    "{" => "}",
+    "[" => "]",
+    "(" => ")",
+  }
+
+  sets = {
+    "{" => true,
+    "}" => true,
+    "[" => true,
+    "]" => true,
+    "(" => true,
+    ")" => true
+  }
+
+  stack = []
+
+  string.chars.each do |char|
+    if pairs[char]
+      stack << char
+    elsif !sets[char]
+      next
+    else
+      return false if stack.empty?
+      if pairs[stack.pop] == char
+        next
+      else
+        return false
+      end
+    end
+  end
+
+  true
 end
 
-p steal_houses_rec_index(houses1, []) == [1, 4]
-p steal_houses_rec_index(houses1, []) == [0, 2, 4]
-p steal_houses_rec_index(houses1, []) == [0, 2, 4, 6, 9]
+p parenthesis_checker("3") == true
+p parenthesis_checker("{([])}") == true
+p parenthesis_checker("()") == true
+p parenthesis_checker("()[]") == true
+p parenthesis_checker("[()]{}{[()()]()}") == true
+p parenthesis_checker("[(])") == false
