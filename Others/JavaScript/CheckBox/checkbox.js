@@ -3,7 +3,6 @@ document.getElementById("check-all").addEventListener("click", () => checkAll())
 
 const checkBoxes = () => {
   let inputs = document.querySelectorAll("input[type='checkbox']");
-  console.log(inputs);
   let checkAll = inputs[inputs.length - 1];
   let count = 0;
 
