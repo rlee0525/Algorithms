@@ -1,5 +1,6 @@
 document.getElementById("check-all").addEventListener("click", () => checkAll());
 
+
 const checkAll = () => {
   let checkOne = document.getElementById("check-one");
   let checkTwo = document.getElementById("check-two");
@@ -12,4 +13,23 @@ const checkAll = () => {
   }
 }
 
-const 
+
+const clickCheckOne = () => {
+
+}
+
+const clickCheckTwo = () => {
+
+}
+
+const clickCheckThree = () => {
+
+}
+
+const clickCheckAll = () => {
+
+}
+
+const checkAll = () => {
+
+}
