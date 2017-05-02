@@ -1,35 +1,35 @@
+document.getElementById("checkbox-container").addEventListener("click", () => checkBoxes());
 document.getElementById("check-all").addEventListener("click", () => checkAll());
 
+const checkBoxes = () => {
+  let inputs = document.querySelectorAll("input[type='checkbox']");
+  console.log(inputs);
+  let checkAll = inputs[inputs.length - 1];
+  let count = 0;
 
-const checkAll = () => {
-  let checkOne = document.getElementById("check-one");
-  let checkTwo = document.getElementById("check-two");
-  let checkThree = document.getElementById("check-three");
+  for (var i = 0; i < inputs.length - 1; i++) {
+    if (inputs[i].checked === true) {
+      count++;
+    }
+  }
 
-  if (checkOne.checked === true) {
-    console.log("hi");
+  if (count === Object.keys(inputs).length - 1) {
+    checkAll.checked = true;
   } else {
-    console.log("no");
+    checkAll.checked = false;
   }
 }
 
-
-const clickCheckOne = () => {
-
-}
-
-const clickCheckTwo = () => {
-
-}
-
-const clickCheckThree = () => {
-
-}
-
-const clickCheckAll = () => {
-
-}
-
 const checkAll = () => {
+  let inputs = document.querySelectorAll("input[type='checkbox']");
 
+  if (event.target.checked) {
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].checked = true;
+    }
+  } else {
+    for (var i = 0; i < inputs.length; i++) {
+      inputs[i].checked = false;
+    }
+  }
 }
