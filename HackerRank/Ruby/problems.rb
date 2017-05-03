@@ -37,3 +37,51 @@ def print_children(hash, id, level)
 end
 
 select_field(object)
+
+def removeNodes(list, x)
+  while list.val > x
+    list = list.next
+
+    if !list
+      return nil
+    end
+  end
+
+  root = list
+  prev_node = root
+  current_node = root.next
+
+  while current_node
+    if current_node.val > x
+      prev_node.next = current_node.next
+      current_node = current_node.next
+    else
+      prev_node = current_node
+      current_node = current_node.next
+    end
+  end
+
+  root
+end
+
+class Node
+  attr_accessor :val, :next
+
+  def initialize(val)
+    @val = val
+    @next = nil
+  end
+end
+
+a = Node.new(1)
+b = Node.new(2)
+c = Node.new(3)
+d = Node.new(4)
+e = Node.new(5)
+
+a.next = b
+b.next = c
+c.next = d
+d.next = e
+
+p removeNodes(a, 0)
