@@ -29,4 +29,37 @@ const add = (count, ...args) => {
 // 2) call it again if not
 // 3) add
 
-console.log(add(6, 10, 5, 2)(5, 20)(10));
+// console.log(add(6, 10, 5, 2)(5, 20)(10));
+
+const addNum = (...args) => {
+  let sum = 0;
+  for (var i = 0; i < args.length; i++) {
+    sum += args[i];
+  }
+
+  const _curry = (...nums) => {
+    if (nums.length === 0) {
+      return sum;
+    } else {
+      for (var i = 0; i < nums.length; i++) {
+        sum += nums[i];
+      }
+
+      return _curry;
+    }
+  }
+
+  return _curry;
+}
+
+let curried = addNum(6, 10, 5, 2)(5, 20)(10);
+
+const typeCheck = (fn) => {
+  if (typeof fn === "function") {
+    return fn();
+  } else {
+    return fn;
+  }
+}
+
+console.log(typeCheck(curried));
