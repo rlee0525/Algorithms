@@ -45,3 +45,48 @@ word_list = ["hot", "dot", "dog", "lot", "log", "cog"]
 # shortest: "hit" -> "hot" -> "dot" -> "dog" -> "cog"
 
 p wordLadder(begin_word, end_word, word_list) == 5
+
+# Version 2 - Find the shortest version
+def wordLadder2(beginWord, endWord, wordList)
+  visited = {}
+  queue = [beginWord]
+  count = 1
+
+  until queue.empty? || count > wordList.length
+    current_word = queue.shift
+
+    if current_word.is_a?(Array)
+      count = current_word[1]
+      current_word = current_word[0]
+    end
+
+    wordList.each do |word|
+      if oneLetter(current_word, word) && !visited[word]
+        queue << [word, count + 1]
+        visited[word] = true
+
+        return count + 1 if word == endWord
+      end
+    end
+  end
+
+  0
+end
+#
+# ["hot", "mit", "dot", "dog", "lot", "log", "cog"]
+#
+# current = "hit"
+# next = ["hot", 1], ["mit", 1] (delete these)
+# next = {["hot", 1]: ["dot", 2] : ["dog", 3], ["cog", 4]
+#                   : ["lot", 2] : ["log", 3], ["cog", 4]
+#
+# 1) put everything into a queue
+# 2) find all the adjacaent words (one letter difference) and count of transformation for that specific chain
+# 3) store all of them in an array
+# 4) pick the one with lowest transformation count
+
+beginWord = "hit"
+endWord = "cog"
+wordList = ["hot", "dot", "dog", "lot", "log", "cog"]
+
+p wordLadder2(beginWord, endWord, wordList) #== 5
