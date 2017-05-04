@@ -54,3 +54,24 @@ endWord = "cog"
 wordList = ["hot", "dot", "dog", "lot", "log", "cog"]
 
 p wordLadder(beginWord, endWord, wordList) == 5
+
+
+def visiblePoints(points)
+  
+end
+
+# 1. get upper bound (slope)
+# 2. get lower bound (slope)
+# 3. iterate through 360
+# 4. iterate through points array - compare x and y to see if they are visible
+# 5. count the numbers
+# 6. replace max every time greater is found
+# 7. return max
+
+points = [
+  [ 1,  1], [ 3,  1], [ 3,  2], [ 3,  3],
+  [ 1,  3], [ 2,  5], [ 1,  5], [-1, -1],
+  [-1, -2], [-2, -3], [-4, -4]
+]
+
+p visiblePoints(points) #== 6
