@@ -1,4 +1,6 @@
-string = "<html><head></head><div><div></div></div></html>"
+# Still requires modification to consider edge case of nesting inside nesting
+
+string = "<html><head></head><div><span><p></p></span></div></html>"
 # 0 => html, parent = html. count = 0
 # 1 => head, parent = html. count = 0 => 1
 # 2 => /head, parent = html. count = 1 => 0
@@ -40,8 +42,8 @@ def html_parser(string)
       count += 1
     elsif splitted[i][0] == "/"
       parent_node = parent_node.children[-1] if parent_node
-      count -= 1
     end
+
     i += 1
   end
 
