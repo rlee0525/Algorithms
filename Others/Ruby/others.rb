@@ -88,7 +88,7 @@ def parenthesis_checker(string)
     end
   end
 
-  true
+  stack.empty?
 end
 
 p parenthesis_checker("3") == true
