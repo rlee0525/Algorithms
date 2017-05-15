@@ -97,3 +97,86 @@ p parenthesis_checker("()") == true
 p parenthesis_checker("()[]") == true
 p parenthesis_checker("[()]{}{[()()]()}") == true
 p parenthesis_checker("[(])") == false
+
+# you have this data set of pairs. and the first number in the pair is the parent of the second number
+# return values that have 0 parents and values that have 1 parent
+# so zeroParents in that case would be [1, 2, 4] and oneParents would be [5, 7, 8, 9]
+# 1   2    4
+#   \ /    / \
+#    3    5   8
+#     \  / \   \
+#      6    7   9
+
+# THEN find LCA =>  [6, 8] = 4
+
+def find_loners(array)
+  values = {}
+  parents = {}
+
+  array.each do |pair|
+    values[pair[0]] = true unless values[pair[0]]
+    values[pair[1]] = true unless values[pair[1]]
+
+    if !parents[pair[1]]
+      parents[pair[1]] = [pair[0]]
+    else
+      parents[pair[1]] << pair[0]
+    end
+  end
+
+  result = [[], []]
+
+  values.each do |k, _|
+    if !parents[k]
+      result[0] << k
+    elsif parents[k].length == 1
+      result[1] << k
+    end
+  end
+
+  result
+end
+
+parent_child_pairs = [
+  [1, 3], [2, 3], [3, 6], [5, 6],
+  [5, 7], [4, 5], [4, 8], [8, 9]
+]
+
+p find_loners(parent_child_pairs) == [[1, 2, 4], [5, 7, 8, 9]]
+
+def find_LCA(array, children)
+  parents = Hash.new { |h, k| h[k] = [] }
+
+  array.each do |pair|
+    parents[pair[1]] << pair[0]
+  end
+
+  queue = [children[0]]
+  seen = {}
+
+  until queue.empty?
+    current = queue.shift
+
+    parents[current].each do |parent|
+      seen[parent] = true
+      queue << parent
+    end
+  end
+
+  queue = [children[1]]
+
+  until queue.empty?
+    current = queue.shift
+
+    return current if seen[current]
+    parents[current].each do |parent|
+      queue << parent
+    end
+  end
+
+  -1
+end
+
+p find_LCA(parent_child_pairs, [6, 8]) == 4
+p find_LCA(parent_child_pairs, [3, 5]) == -1
+p find_LCA(parent_child_pairs, [7, 5]) == 5
