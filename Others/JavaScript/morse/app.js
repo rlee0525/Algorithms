@@ -8,7 +8,6 @@
  * Also feel free to modify this code or the HTML as much as needed.  You do not need to use this structure.
  * http://safetybelt.pythonanywhere.com/letters/
 **/
-
 const translateString = char => {
   return fetch(`http://safetybelt.pythonanywhere.com/letters/${char}`).then(res => res.json()).then(resJson => resJson.code)
 };
@@ -21,11 +20,11 @@ const getInput = string => {
     output.push(translateString(chars[i]))
   }
 
-  getOutput(output);
+  getOutput(output)
 };
 
 const getOutput = output => {
-  Promise.all(output).then(values => {
+  Promise.all(output).then(value => {
     document.getElementById("result").innerHTML = values.join("");
   });
 };
@@ -35,4 +34,4 @@ document.getElementById("translate").addEventListener("click", () => {
 
   let string = document.getElementById("string").value;
   getInput(string);
-});
+})
