@@ -260,16 +260,111 @@ def sortByString(s, t)
   new_string
 end
 
+# https://codefights.com/interview/rm8sj82SYiJYApvKw/companies/5xHhsMkmS5vrFDGLP
 
+# You have an unsorted array arr of non-negative integers and a number s. Find a longest contiguous subarray in arr that has a sum equal to s. Return two integers that represent its inclusive bounds. If there are several possible answers, return the one with the smallest left bound. If there are no answers, return [-1].
 
+# Your answer should be 1-based, meaning that the first position of the array is 1 instead of 0.
 
+# Example
 
+# For s = 12 and arr = [1, 2, 3, 7, 5], the output should be
+# findLongestSubarrayBySum(s, arr) = [2, 4].
 
+# The sum of elements from the 2nd position to the 4th position (1-based) is equal to 12: 2 + 3 + 7.
 
+# For s = 15 and arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], the output should be
+# findLongestSubarrayBySum(s, arr) = [1, 5].
 
+# The sum of elements from the 1st position to the 5th position (1-based) is equal to 15: 1 + 2 + 3 + 4 + 5.
 
+# For s = 15 and arr = [1, 2, 3, 4, 5, 0, 0, 0, 6, 7, 8, 9, 10], the output should be
+# findLongestSubarrayBySum(s, arr) = [1, 8].
 
+# The sum of elements from the 1st position to the 8th position (1-based) is equal to 15: 1 + 2 + 3 + 4 + 5 + 0 + 0 + 0.
 
+# Input/Output
+
+# [time limit] 4000ms (rb)
+# [input] integer s
+
+# The sum of the subarray that you are searching for.
+
+# Guaranteed constraints:
+# 0 ≤ s ≤ 109.
+
+# [input] array.integer arr
+
+# The given array.
+
+# Guaranteed constraints:
+# 1 ≤ arr.length ≤ 105,
+# 0 ≤ arr[i] ≤ 104.
+
+# [output] array.integer
+
+# An array that contains two elements that represent the left and right bounds of the subarray, respectively (1-based). If there is no such subarray, return [-1].
+
+def findLongestSubarrayBySum(s, arr)
+
+end
+
+# https://codefights.com/interview/boGisZK5K3aBEhn9a/companies/5xHhsMkmS5vrFDGLP
+# Given an array of integers, determine whether there are two distinct indices i and j in the array such that:
+
+# The absolute difference between i and j is at most k
+# The absolute difference between nums[i] and nums[j] is at most t
+# Example
+
+# For nums = [1, 3, 1], k = 2 and t = 1, the output should be
+# containsNearbyAlmostDuplicate(nums, k, t) = true.
+
+# The absolute difference between indices 0 and 2 is 2 (the value of k) and the absolute difference between elements 1 and 1 is 0 (less than the value of t), so this array meets all of the requirements and the output is true.
+
+# For nums = [-3, 3], k = 2 and t = 4, the output should be
+# containsNearbyAlmostDuplicate(nums, k, t) = false.
+
+# The absolute difference between -3 and 3 is 6, which is more than the value of t, meaning that the output is false.
+
+# Input/Output
+
+# [time limit] 4000ms (rb)
+# [input] array.integer nums
+
+# Guaranteed constraints:
+# 2 ≤ nums.length ≤ 2 · 105,
+# -231≤ nums[i] ≤ 231 - 1.
+
+# [input] integer k
+
+# An integer that represents the highest allowable absolute difference between i and j.
+
+# Guaranteed constraints:
+# 1 ≤ k ≤ 104.
+
+# [input] integer t
+
+# An integer that represents the highest allowable absolute difference between nums[i] and nums[j].
+
+# Guaranteed constraints:
+# 0 ≤ t ≤ 231 - 1.
+
+# [output] boolean
+
+# Return true if the input array meets the requirements as stated above, otherwise return false.
+
+def containsNearbyAlmostDuplicate(nums, k, t)
+    (0...nums.length).each do |idx|
+        num = nums[idx]
+        idx2 = idx + 1
+        while idx2 <= idx + k && idx2 < nums.length
+            return true if (num - nums[idx2]).abs <= t
+            idx2 += 1
+        end
+    end
+    
+    false
+end
 
 
 
@@ -360,135 +455,6 @@ p sumSubsets([1, 2, 3, 4, 5], 5) == [[1, 4], [2, 3], [5]]
 # An integer that is the sum of all of the sums gotten from querying nums, taken modulo 109 + 7.
 
 def sumInRange(arr)
-
-end
-
-# sortByString
-# https://codefights.com/interview/myCQFF3mJ9nx7z6cJ/companies/5xHhsMkmS5vrFDGLP
-
-# Sort the letters in the string s by the order they occur in the string t.
-#
-# Example
-#
-# For s = "weather" and t = "therapyw", the output should be
-# sortByString(s, t) = "theeraw";
-#
-# For s = "good" and t = "odg", the output should be
-# sortByString(s, t) = "oodg".
-#
-# Input/Output
-#
-# [time limit] 4000ms (rb)
-# [input] string s
-#
-# A string consisting only of lowercase English letters.
-#
-# Guaranteed constraints:
-# 0 ≤ s.length ≤ 104.
-#
-# [input] string t
-#
-# A string consisting only of unique lowercase English letters. It is guaranteed that t contains all of the letters that occur in s.
-#
-# Guaranteed constraints:
-# 0 ≤ t.length ≤ 26.
-#
-# [output] string
-
-def sortByString(string)
-
-end
-
-# singleNumber
-# https://codefights.com/interview/7xqHvuKXT2oBJ26iq/companies/5xHhsMkmS5vrFDGLP
-
-# You are given an array of integers in which every element appears twice, except for one. Find the element that only appears one time. Your solution should have a linear runtime complexity (O(n)). Try to implement it without using extra memory.
-#
-# Example
-#
-# For nums = [2, 2, 1], the output should be
-# singleNumber(nums) = 1.
-#
-# Input/Output
-#
-# [time limit] 4000ms (rb)
-# [input] array.integer nums
-#
-# Guaranteed constraints:
-# 1 ≤ nums.length ≤ 104,
-# -109 ≤ nums[i] ≤ 109.
-#
-# [output] integer
-
-def singleNumber()
-end
-
-# isCryptSolution
-# https://codefights.com/interview/cXbXXx9jPxvMroggD/companies/5xHhsMkmS5vrFDGLP
-# A cryptarithm is a mathematical puzzle for which the goal is to find the correspondence between letters and digits, such that the given arithmetic equation consisting of letters holds true when the letters are converted to digits.
-#
-# You have an array of strings crypt, the cryptarithm, and an an array containing the mapping of letters and digits, solution. The array crypt will contain three non-empty strings that follow the structure: [word1, word2, word3], which should be interpreted as the word1 + word2 = word3 cryptarithm.
-#
-# If crypt, when it is decoded by replacing all of the letters in the cryptarithm with digits using the mapping in solution, becomes a valid arithmetic equation containing no numbers with leading zeroes, the answer is true. If it does not become a valid arithmetic solution, the answer is false.
-#
-# Example
-#
-# For crypt = ["SEND", "MORE", "MONEY"] and
-#
-# solution = [['O', '0'],
-#             ['M', '1'],
-#             ['Y', '2'],
-#             ['E', '5'],
-#             ['N', '6'],
-#             ['D', '7'],
-#             ['R', '8'],
-#             ['S', '9']]
-# the output should be
-# isCryptSolution(crypt, solution) = true
-#
-# When you decrypt "SEND", "MORE", and "MONEY" using the mapping given in crypt, you get 9567 + 1085 = 10652 which is correct and a valid arithmetic equation.
-#
-# For crypt = ["TEN", "TWO", "ONE"] and
-#
-# solution = [['O', '1'],
-#             ['T', '0'],
-#             ['W', '9'],
-#             ['E', '5'],
-#             ['N', '4']]
-# the output should be
-# isCryptSolution(crypt, solution) = false
-#
-# Even though 054 + 091 = 145, 054 and 091 both contain leading zeroes, meaning that this is not a valid solution.
-#
-# Input/Output
-#
-# [time limit] 4000ms (rb)
-# [input] array.string crypt
-#
-# An array of three non-empty strings containing only uppercase English letters.
-#
-# Guaranteed constraints:
-# crypt.length = 3,
-# 1 ≤ crypt[i].length ≤ 14.
-#
-# [input] array.array.char solution
-#
-# An array consisting of pairs of characters that represent the correspondence between letters and numbers in the cryptarithm. The first character in the pair is an uppercase English letter, and the second one is a digit in the range from 0 to 9.
-#
-# Guaranteed constraints:
-# solution[i].length = 2,
-# 'A' ≤ solution[i][0] ≤ 'Z',
-# '0' ≤ solution[i][1] ≤ '9',
-# solution[i][0] ≠ solution[j][0], i ≠ j,
-# solution[i][1] ≠ solution[j][1], i ≠ j.
-#
-# It is guaranteed that solution only contains entries for the letters present in crypt and that different letters have different values.
-#
-# [output] boolean
-#
-# Return true if the solution represents the correct solution to the cryptarithm crypt, otherwise return false.
-
-def isCryptSolution
 
 end
 
