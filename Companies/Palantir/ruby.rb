@@ -212,6 +212,73 @@ def containsCloseNums(nums, k)
   false
 end
 
+# https://codefights.com/interview/myCQFF3mJ9nx7z6cJ/companies/5xHhsMkmS5vrFDGLP
+
+# Sort the letters in the string s by the order they occur in the string t.
+
+# Example
+
+# For s = "weather" and t = "therapyw", the output should be
+# sortByString(s, t) = "theeraw";
+
+# For s = "good" and t = "odg", the output should be
+# sortByString(s, t) = "oodg".
+
+# Input/Output
+
+# [time limit] 4000ms (rb)
+# [input] string s
+
+# A string consisting only of lowercase English letters.
+
+# Guaranteed constraints:
+# 0 ≤ s.length ≤ 104.
+
+# [input] string t
+
+# A string consisting only of unique lowercase English letters. It is guaranteed that t contains all of the letters that occur in s.
+
+# Guaranteed constraints:
+# 0 ≤ t.length ≤ 26.
+
+# [output] string
+
+def sortByString(s, t)
+  hash = Hash.new(0)
+  new_string = ""
+
+  s.each_char do |char|
+    hash[char] += 1
+  end
+  
+  t.each_char do |char|
+    if hash[char]
+      new_string += char * hash[char]
+    end
+  end
+  
+  new_string
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # -----------------
