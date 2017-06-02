@@ -353,23 +353,153 @@ end
 
 # Return true if the input array meets the requirements as stated above, otherwise return false.
 
-def containsNearbyAlmostDuplicate(nums, k, t)
-    (0...nums.length).each do |idx|
-        num = nums[idx]
-        idx2 = idx + 1
-        while idx2 <= idx + k && idx2 < nums.length
-            return true if (num - nums[idx2]).abs <= t
-            idx2 += 1
-        end
-    end
+# def containsNearbyAlmostDuplicate(nums, k, t)
+#     (0...nums.length).each do |idx|
+#         num = nums[idx]
+#         idx2 = idx + 1
+#         while idx2 <= idx + k && idx2 < nums.length
+#             return true if (num - nums[idx2]).abs <= t
+#             idx2 += 1
+#         end
+#     end
     
-    false
+#     false
+# end
+
+class BSTNode
+  attr_accessor :left, :right
+  attr_reader :value
+
+  def initialize(value)
+    @value = value
+    @left = nil
+    @right = nil
+  end
 end
 
+class BinarySearchTree
+  def initialize
+    @root = nil
+  end
+  
+  def insert(value)
+    if @root
+      BinarySearchTree.insert!(@root, value)
+    else
+      @root = BSTNode.new(value)
+    end
+  end
+  
+  def self.insert!(node, value)
+    return BSTNode.new(value) unless node
 
+    if node.value <= value
+      node.left = BinarySearchTree.insert!(node.left, value)
+    else
+      node.right = BinarySearchTree.insert!(node.right, value)
+    end
+    
+    node
+  end
+  
+  def min
+    BinarySearchTree.min(@root)
+  end
 
+  def self.min(node)
+    return nil unless node
+    return node unless node.left
 
+    BinarySearchTree.min(node.left)
+  end
 
+  def max
+    BinarySearchTree.max(@root)
+  end
+  
+  def self.max(node)
+    return nil unless node
+    return node unless node.right
+
+    BinarySearchTree.max(node.right)
+  end
+  
+  def find(value)
+    BinarySearchTree.find!(@root, value)
+  end
+
+  def self.find!(node, value)
+    return nil unless node
+    return node if node.value == value
+
+    if node.value < value
+      BinarySearchTree.find!(node.left, value)
+    else
+      BinarySearchTree.find!(node.right, value)
+    end
+  end
+
+  def height
+    BinarySearchTree.height!(@root)
+  end
+
+  def height!(node)
+    return -1 unless node
+
+    1 + [BinarySearchTree.height!(node.left), BinarySearchTree.height!(node.right)].max
+  end
+
+  def self.delete_min!(node)
+    return nil unless node
+    return node.right unless node.left
+
+    node.left = BinarySearchTree.delete_min!(node.left)
+  end
+  
+  def delete(value)
+    BinarySearchTree.delete!(@root, value)
+  end
+  
+  def delete!(node, value)
+    return nil unless BinarySearchTree.find!(node, value)
+
+    if value < node.value
+      node.left = BinarySearchTree.delete!(node.left, value)
+    elsif value > node.value
+      node.right = BinarySearchTree.delete!(node.right, value)
+    else
+      if !node.left
+        BinarySearchTree.delete_min!(node)
+      else
+        BinarySearchTree.max(node.right)
+      end
+    end
+  end
+
+  def ceil(value)
+    BinarySearchTree.ceil!(@root, value)
+  end
+  
+  def ceil!(node, value)
+    return nil unless node
+    return node.value if node.value == value
+
+    return BinarySearchTree.ceil!(node.right, value) if node.value < value
+
+    ceil = BinarySearchTree.ceil!(node.left, value)
+
+    if ceil >= value
+      return ceil
+    else
+      return node.value
+    end
+  end
+  
+end
+
+def containsNearbyAlmostDuplicate(nums, k, t)
+  
+end
 
 
 
