@@ -120,3 +120,57 @@ def check_squares(grid)
 
   check_vals(squares)
 end
+
+# You are given an n x n 2D matrix that represents an image. Rotate the image by 90 degrees (clockwise).
+
+# Try to solve this in-place - in a real interview, you will only be allowed to use O(1) additional memory.
+
+# Example
+
+# For
+
+# a = [[1, 2, 3],
+#      [4, 5, 6],
+#      [7, 8, 9]]
+# the output should be
+
+# rotateImage(a) =
+#     [[7, 4, 1],
+#      [8, 5, 2],
+#      [9, 6, 3]]
+# Input/Output
+
+# [time limit] 4000ms (rb)
+# [input] array.array.integer a
+
+# Guaranteed constraints:
+# 1 ≤ a.length ≤ 100,
+# a[i].length = a.length,
+# 1 ≤ a[i][j] ≤ 104.
+
+# [output] array.array.integer
+
+def rotateImage(a)
+  #transpose
+  (0...a.length).each do |row|
+    col = row + 1
+    while col < a.length
+      a[row][col], a[col][row] = a[col][row], a[row][col]
+      col += 1
+    end
+  end
+  
+  #reverse each row
+  mid = a.length / 2
+  (0...a.length).each do |row|
+    col_end = a.length - 1
+    col = 0
+
+    while col < mid
+      a[row][col], a[row][col_end - col] = a[row][col_end - col], a[row][col]
+      col += 1
+    end
+  end
+
+  a  
+end
