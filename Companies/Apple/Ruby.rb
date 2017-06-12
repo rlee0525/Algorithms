@@ -196,6 +196,7 @@ end
 
 # [output] integer
 
+# built-in => to_s(2)
 def numberOf1Bits(n)
   count = 0
   
@@ -204,6 +205,18 @@ def numberOf1Bits(n)
   end
   
   count -= 1 if n < 0
+  
+  count
+end
+
+# not built-in
+def numberOf1Bits(n)
+  count = 0
+
+  while n != 0
+    count += n & 1
+    n >>= 1
+  end
   
   count
 end
