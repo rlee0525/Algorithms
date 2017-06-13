@@ -352,3 +352,42 @@ def productExceptSelf(nums, m)
   
   total % m
 end
+
+# Given an integer len, count the number of different good strings that have a length of exactly len. A good string is a string for which the following conditions are true:
+
+# A good string contains only lowercase English letters.
+# Each character in a good string is unique.
+# Exactly one character in a good string is lexicographically greater than the character that precedes it.
+# Example
+
+# For len = 2, the output should be
+# goodStringsCount(len) = 325.
+
+# If the first symbol is 'a', there are 25 possible good strings: "ab", "ac", ...
+# If the first symbol is 'b', there are 24 possible good strings: "bc", "bd", ...
+# ...
+# If the first symbol is 'z', there are 0 possible good strings because there is no character that is lexicographically greater.
+# There are 25 + 24 + 23 + ... + 0 = 325 good strings that have a length of 2.
+
+# For len = 1, the output should be
+# goodStringsCount(len) = 0.
+
+# The 3rd rule for good strings can't be true if there is only one character in the string.
+
+# Input/Output
+
+# [time limit] 4000ms (rb)
+# [input] integer len
+
+# The length of good strings that you're looking for.
+
+# Guaranteed constraints:
+# 1 ≤ len ≤ 9.
+
+# [output] integer
+
+# The number of different good strings with a length of exactly len.
+
+def goodStringsCount(len)
+
+end
