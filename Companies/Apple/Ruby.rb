@@ -336,13 +336,19 @@ end
 
 # too slow.
 def productExceptSelf(nums, m)
-  total = nums.inject(:*)
+  prefix = [1] * nums.length
+  suffix = [1] * nums.length
 
-  new_products = []
-
-  nums.each do |num|
-    new_products << total / num
+  (1...nums.length).each do |idx|
+    prefix[idx] = (prefix[idx - 1] * nums[idx - 1]) % m
+    suffix[-idx - 1] = (suffix[-idx] * nums[-idx]) % m
   end
   
-  new_products.inject(:+) % m
+  total = 0
+
+  (0...nums.length).each do |idx|
+    total += (prefix[idx] * suffix[idx]) % m
+  end
+  
+  total % m
 end
