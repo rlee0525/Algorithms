@@ -16,3 +16,6 @@ def two_sum(nums, target)
     hash[target - num] = idx
   end
 end
+
+# Time O(N)
+# Space O(N)

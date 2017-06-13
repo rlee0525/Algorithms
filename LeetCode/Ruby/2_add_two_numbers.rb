@@ -60,3 +60,6 @@ def add_two_numbers(l1, l2)
   
   result
 end
+
+# Time O(N)
+# Space O(N)
