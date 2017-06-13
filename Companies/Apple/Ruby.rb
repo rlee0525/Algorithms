@@ -389,5 +389,13 @@ end
 # The number of different good strings with a length of exactly len.
 
 def goodStringsCount(len)
+  nCr(26, len) * (2 ** len - len - 1)
+end
 
+def nCr(n, r)
+  factorial(n) / (factorial(n - r) * factorial(r))
+end
+
+def factorial(n)
+  (1..n).inject(:*) || 1
 end
