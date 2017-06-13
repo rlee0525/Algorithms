@@ -483,5 +483,27 @@ end
 # An integer that represents the area of the largest square in the given matrix that is composed only of 1s.
 
 def maximalSquare(matrix)
+  max_number = 0
 
+  (0...matrix.length).each do |r_idx|
+    (0...matrix[r_idx].length).each do |c_idx|
+      current = matrix[r_idx][c_idx]
+      
+      if current == '0'
+        matrix[r_idx][c_idx] = 0 
+      elsif current == '1' && (c_idx == 0 || r_idx == 0)
+        matrix[r_idx][c_idx] = 1
+      else
+        matrix[r_idx][c_idx] = [
+          matrix[r_idx - 1][c_idx - 1], 
+          matrix[r_idx][c_idx - 1], 
+          matrix[r_idx - 1][c_idx]
+        ].min + 1
+      end
+
+      max_number = max_number > matrix[r_idx][c_idx] ? max_number : matrix[r_idx][c_idx]
+    end
+  end
+
+  max_number ** 2
 end
