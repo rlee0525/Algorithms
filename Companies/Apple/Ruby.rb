@@ -399,3 +399,35 @@ end
 def factorial(n)
   (1..n).inject(:*) || 1
 end
+
+# You are climbing a staircase that has n steps. You can take the steps either 1 or 2 at a time. Calculate how many distinct ways you can climb to the top of the staircase.
+
+# Example
+
+# For n = 1, the output should be
+# climbingStairs(n) = 1;
+
+# For n = 2, the output should be
+# climbingStairs(n) = 2.
+
+# You can either climb 2 steps at once or climb 1 step two times.
+
+# Input/Output
+
+# [time limit] 4000ms (rb)
+# [input] integer n
+
+# Guaranteed constraints:
+# 1 ≤ n ≤ 50.
+
+# [output] integer
+
+# It's guaranteed that the answer will fit in a 32-bit integer.
+
+# recursion
+def climbingStairs(n)
+  return 1 if n == 1
+  return 2 if n == 2
+  
+  climbingStairs(n - 1) + climbingStairs(n - 2)
+end
