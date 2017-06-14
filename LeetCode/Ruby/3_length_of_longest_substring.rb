@@ -30,4 +30,4 @@ def length_of_longest_substring(s)
 end
 
 # Time O(N^2)
-# Space O(N)
+# Space O(2N)
