@@ -44,33 +44,61 @@
 #                0-3, 1-4
 #                     0-4
 
-def longest_palindrome(string)
-  return nil if string.empty?
+# def longest_palindrome(string)
+#   return nil if string.empty?
 
-  table = Array.new(string.length) { Array.new(string.length) }
+#   table = Array.new(string.length) { Array.new(string.length) }
+#   start_idx = 0
+#   end_idx = 0
+#   max = 0
+
+#   (0...string.length).each do |j|
+#     (0..j).each do |i|
+#       if string[i] == string[j] && (i == j || j - i == 1 || table[i + 1][j - 1])
+#         table[i][j] = true
+
+#         if max <= (j - i + 1)
+#           start_idx = i
+#           end_idx = j
+#           max = j - i + 1
+#         end
+#       end
+#     end
+#   end
+
+#   string[start_idx..end_idx]
+# end
+# Dynamic Programming - Time O(N^2 + N), Space O(N^2)
+
+def longest_palindrome(string)
   start_idx = 0
   end_idx = 0
-  max = 0
+  
+  (0...string.length).each do |idx|
+    odd = expand_center(string, idx, idx)
+    even = expand_center(string, idx, idx + 1)
+    length = [odd, even].max
 
-  (0...string.length).each do |j|
-    (0..j).each do |i|
-      p i
-      p j 
-      if string[i] == string[j] && (i == j || j - i == 1 || table[i + 1][j - 1])
-        table[i][j] = true
-
-        if max <= (j - i + 1)
-          start_idx = i
-          end_idx = j
-          max = j - i + 1
-        end
-      end
+    if length > end_idx - start_idx
+      start_idx = idx - (length - 1) / 2
+      end_idx = idx + length / 2
     end
   end
-
+  
   string[start_idx..end_idx]
 end
-# Dynamic Programming - Time O(N^2 + N), Space O(N^2)
+
+def expand_center(string, left, right)
+  while left >= 0 && right < string.length && string[left] == string[right]
+    left -= 1
+    right += 1
+  end
+  
+  right - left - 1
+end
+
+# Expanding Center - Time O(N^2), Space O(1)
+
 
 # def longest_palindrome(string)
 #     test_str = "#" + string.split('').join('#') + "#"
