@@ -15,6 +15,14 @@
 # isMatch("ab", ".*") → true
 # isMatch("aab", "c*a*b") → true
 
-def is_match(s, p)
+def is_match(string, pattern)
+  return string.empty? if pattern.empty?
 
+  if pattern[1] == "*"
+    is_match(string, pattern[2..-1]) || !string.empty? && (string[0] == pattern[0] || pattern[0] == ".") && is_match(string[1..-1], pattern)
+  else
+    !string.empty? && (string[0] == pattern[0] || pattern[0] == '.') && is_match(string[1..-1], pattern[1..-1])
+  end
 end
+
+# Recursive - TLE solution
