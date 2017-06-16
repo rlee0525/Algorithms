@@ -6,8 +6,12 @@
 
 def max_area(height)
   max_area = 0
+  seen = {}
 
   (0...height.length).each do |idx|
+    next if seen[idx]
+    seen[idx] = true
+
     (idx + 1...height.length).each do |idx2|
       h = [height[idx], height[idx2]].min
       area = h * (idx2 - idx)
@@ -20,3 +24,20 @@ end
 
 # Time O(N^2) TLE
 
+def max_area(height)
+  max_area = 0
+
+  i = 0
+  j = height.length - 1
+
+  while i < j
+    min = height[i] > height[j] ? j : i
+    area = height[min] * (j - i)
+    max_area = area > max_area ? area : max_area
+    min == j ? j -= 1 : i += 1
+  end
+  
+  max_area
+end
+
+# Time O(N)
