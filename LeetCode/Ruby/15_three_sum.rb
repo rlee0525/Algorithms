@@ -38,3 +38,40 @@ def three_sum(nums)
 end
 
 # Time O(N^3)
+def three_sum(nums)
+  nums.sort!
+  set = []
+  i = 0
+
+  while i < nums.length - 2
+    low = i + 1
+    high = nums.length - 1
+
+    if (i == 0 || (i > 0 && nums[i] > nums[i - 1]))
+      while low < high
+        if nums[low] + nums[high] + nums[i] == 0
+          set << [nums[i], nums[low], nums[high]]
+          low += 1
+          high -= 1
+          
+          while nums[low] == nums[low - 1]
+            low += 1
+          end
+        
+          while nums[high] == nums[high + 1]
+            high -= 1
+          end
+        
+        elsif nums[low] + nums[high] < 0 - nums[i]
+          low += 1
+        else
+          high -= 1
+        end
+      end
+    end
+    
+    i += 1
+  end
+  
+  set
+end
