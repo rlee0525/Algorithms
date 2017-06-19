@@ -1,29 +1,40 @@
-def three_sum(nums)
-  return [] if nums.length < 3
+# Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
 
+# Note: The solution set must not contain duplicate triplets.
+
+# For example, given array S = [-1, 0, 1, 2, -1, -4],
+
+# A solution set is:
+# [
+#   [-1, 0, 1],
+#   [-1, -1, 2]
+# ]
+
+# @param {Integer[]} nums
+# @return {Integer[][]}
+def three_sum(nums)
   seen = {}
-  indices = []
+  set = []
 
   i = 0
   while i < nums.length
     j = i + 1
     while j < nums.length
-      if seen[nums[j]] && seen[nums[j]].length == 2
-        indices << seen[nums[j]] + [nums[j]] unless indices.include?(seen[nums[j]] + [nums[j]])
+      k = j + 1
+      while k < nums.length
+        if nums[i] + nums[j] + nums[k] == 0 && !seen[[nums[i], nums[j], nums[k]].sort]
+          seen[[nums[i], nums[j], nums[k]].sort] = true
+          set << [nums[i], nums[j], nums[k]] 
+        end
+        
+        k += 1
       end
-      
-      seen[(0 - nums[i] - nums[j])] = [nums[i], nums[j]]
       j += 1
     end
-    
     i += 1
   end
   
-  sorted = []
-  indices.map { |index| sorted << index.sort }
-  sorted.uniq
+  set
 end
 
-S = [-1, 0, 1, 2, -1, -4]
-
-p three_sum(S) #== [[-1, 0, 1], [-1, -1, 2]]
+# Time O(N^3)
