@@ -13,7 +13,7 @@ const largestProduct = array => {
   let optionTwo = sortedArr[lastIndex] * sortedArr[lastIndex - 1] * sortedArr[lastIndex - 2];
 
   return optionOne > optionTwo ? optionOne : optionTwo;
-}
+};
 
 console.log(largestProduct([-10, 7, 29, 30, 5, -10, -70]));
 
@@ -47,7 +47,7 @@ const largestProductTwo = array => {
   let secondProduct = firstMax * secondMax * thirdMax;
 
   return firstProduct > secondProduct ? firstProduct : secondProduct;
-}
+};
 
 console.log(largestProductTwo([-10, 7, 29, 30, 5, -10, -70]));
 
@@ -77,13 +77,13 @@ const removeDuplicates = array => {
 
   for (var i = 0; i < array.length; i++) {
     if (!hash[array[i]]) {
-      newArr.push(array[i])
+      newArr.push(array[i]);
       hash[array[i]] = true;
     }
   }
 
   return newArr;
-}
+};
 
 console.log(removeDuplicates([5, 2, 3, 10, 2, 1, 9, 5, 20])); // [5, 2, 3, 10, 1, 9, 20]
 
@@ -110,7 +110,7 @@ const largestDiff = array => {
   }
 
   return difference;
-}
+};
 //
 // 1) iterate through the array
 // 2) keep minimum
