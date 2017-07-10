@@ -4,6 +4,17 @@
 
 ## Behavioral Questions
 - Why Yelp?
+  - First of all, Yelp made signficant changes to how people do pretty much anything. I, for instance, use it for anything from searching for a food spot to finding a haircut place, to fixing a car and so on. Yelp allows transparency in what the businesses actually do to serve their customers and I would love an opportunity to join a company with huge impacts on people's lives.
+
+  - Delivery service: Yelp is constantly innovating and meeting constomer's demands. Rather than simply sticking to food reviews, it is constantly exploring for ways to impact people's lives. I love the passion and its vision. I would like to take in part as it explores new fields.
+
+  - I've talked to two engineers from Yelp and both of them told me great things of work culture there.
+
+  - Very passionate of what yelp is doing and great potential even more to expand into different fields. I also have a lot of ideas I would like to contribute if given opportunities as Yelp grows to become the most prominent service in consumer / Business interaction.
+
+  - Relatively earlier stage in my career. Great company size to learn and absorb from senior engineers around me while at the same time still a start up culture to build and make a difference. best combination to learn and I think Yelp offers this exclusivity.
+
+
 - Resume Overview
 - Describe your previous projects
 - Research work
@@ -18,13 +29,15 @@
 - Salary expectation
 - Describe yourself in three words.
 - How do you detect a spam-review using ML?
+- What would be a new feature you'd like to add to Yelp?
+  - Great with reviews but I think it would be also very cool to add "Trending places" based on age or area. To show what places are currently "hot" among similar age groups and serve trends in these. For example, for UC Berkeley, what are bars that are popular on certain days, which clubs to check out for students there. Also on to clothings. What can be leading the next trend? Yelp's immense data and users allow expansion.
 
 
 ## Interview Questions
-- Remove duplicates from a string
-- Reduce a 2D array where you need to sum the same elements and return them sorted by amount
-- Implement Dequeue, Enqueue, FindMin()
-- Merge Interval
+<!--- Remove duplicates from a string-->
+<!--- Reduce a 2D array where you need to sum the same elements and return them sorted by amount-->
+<!--- Implement Dequeue, Enqueue, FindMin()-->
+- Given a list of the retaurants' opening time, merge them if they have overlap and write some test cases. (merge interval problem from the leetcode)
 - What happens when you type the address in browser?
 - How does the web browser take you into the right website when you type something? (Explain the mechanism)
 - HackerRank - You have two arrays: Find a mutual item with the best ranking
@@ -50,7 +63,6 @@
 - Sort strings containing restaurant names and ratings by ratings
 - Given a list of businesses and their ratings, return the median (the business with the median rating)
 - **Someone reports openting the webpage of Yelp takes too long, what may cause these situations and how can you deal with it?**
-- Given a list of the retaurants' opening time, merge them if they have overlap and write some test cases. (merge interval problem from the leetcode)
 - Implement a BFS in your preferred programming language.
 - Given the length and width of a board, also given a number n, generate a board that randomly contains n mines in this board.
 - Color sort: given a collection of different colors, return the sorted collection of colors based on the frequency.
@@ -98,8 +110,6 @@
 - Implement a fucntion to take a collection of SET cards and identify a set if it exists or return an error status or something similar if it does not. This is according to the rules of the game "SET"
 - Design an LRU Cache
 - Subtract two strings
-- 
-
 
 ## Algos
 - Leetcode Easy - Medium level problems (Some were straight up copied from it)
@@ -113,7 +123,6 @@
 - How to solve a crossword puzzle like problem (Find all the possible words)
 - Recursion
 - make sure you know how to parse stdin in your chosen language before you go in. (HackerRank)
-
 
 
 ## Longer question
