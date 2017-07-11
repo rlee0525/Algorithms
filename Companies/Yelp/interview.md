@@ -16,6 +16,8 @@
 
 
 - Resume Overview
+
+
 - Describe your previous projects
 - Research work
 - What's the biggest difficulty you faced for your projects?
@@ -37,7 +39,7 @@
 <!--- Remove duplicates from a string-->
 <!--- Reduce a 2D array where you need to sum the same elements and return them sorted by amount-->
 <!--- Implement Dequeue, Enqueue, FindMin()-->
-- Given a list of the retaurants' opening time, merge them if they have overlap and write some test cases. (merge interval problem from the leetcode)
+<!--- Given a list of the retaurants' opening time, merge them if they have overlap and write some test cases. (merge interval problem from the leetcode)-->
 - What happens when you type the address in browser?
 - How does the web browser take you into the right website when you type something? (Explain the mechanism)
 - HackerRank - You have two arrays: Find a mutual item with the best ranking
@@ -110,6 +112,9 @@
 - Implement a fucntion to take a collection of SET cards and identify a set if it exists or return an error status or something similar if it does not. This is according to the rules of the game "SET"
 - Design an LRU Cache
 - Subtract two strings
+- Create a cache for data on a webpage to avoid calling the server whenever possible
+- How would you make a spam detector for Yelp given all the data. Another BST coding question
+- Given a string, print true or false if you can create a palindrome with it.
 
 ## Algos
 - Leetcode Easy - Medium level problems (Some were straight up copied from it)

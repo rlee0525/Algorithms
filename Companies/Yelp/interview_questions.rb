@@ -18,7 +18,6 @@ p remove_dup(dup) == "samrelkwq"
 #Time: O(N)
 #Space: O(2N)
 
-
 # Reduce a 2D array where you need to sum the same elements and return them sorted by amount
 def reduce_array(array)
   seen = Hash.new(0)
@@ -76,7 +75,7 @@ def merge_intervals(intervals)
 
   merged = []
   current = nil
-  
+
   intervals.each do |interval|
     if !current
       current = interval
@@ -89,13 +88,21 @@ def merge_intervals(intervals)
   end
 
   merged << current
-
   merged
 end
 
 intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
 
 p merge_intervals(intervals) == [[1, 6], [8, 10], [15, 18]]
+
+
+
+
+
+
+
+
+
 
 
 
