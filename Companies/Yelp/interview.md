@@ -4,20 +4,15 @@
 
 ## Behavioral Questions
 - Why Yelp?
-  - First of all, Yelp made signficant changes to how people do pretty much anything. I, for instance, use it for anything from searching for a food spot to finding a haircut place, to fixing a car and so on. Yelp allows transparency in what the businesses actually do to serve their customers and I would love an opportunity to join a company with huge impacts on people's lives.
+    - I have three major reasons.
 
-  - Delivery service: Yelp is constantly innovating and meeting constomer's demands. Rather than simply sticking to food reviews, it is constantly exploring for ways to impact people's lives. I love the passion and its vision. I would like to take in part as it explores new fields.
+    - First and foremost, I love Yelp and its product. I believe Yelp has significantly changed how people do pretty much anything. It became essential to first search Yelp reviews before doing anything such as going out to eat, getting a haircut, and so on, which allows customers to make right choices and also gives incentives for businesses to find room for improvement and provide better services. Also, Yelp is constantly innovating and trying to better represent customers' demands such as recent EAT 24. I would love an opportunity to join a company that has huge impacts on people's lives.
 
-  - I've talked to two engineers from Yelp and both of them told me great things of work culture there.
+    - Secondly, kind of similar to the reasons I've just mentioned, I have a lot of ideas and new potential features that Yelp could implement in the future that I would like to take a part in. I have had many ideas that align with Yelp's features that I wanted to build a start-up based off of, and I wish to grow as a software engineer at Yelp and hope to lead a team one day at Yelp to implement such features to make Yelp better and innovate how people interact using Yelp.
 
-  - Very passionate of what yelp is doing and great potential even more to expand into different fields. I also have a lot of ideas I would like to contribute if given opportunities as Yelp grows to become the most prominent service in consumer / Business interaction.
-
-  - Relatively earlier stage in my career. Great company size to learn and absorb from senior engineers around me while at the same time still a start up culture to build and make a difference. best combination to learn and I think Yelp offers this exclusivity.
-
+    - Lastly, I've talked to a few engineers from Yelp through meetups and my colleagues and I was told of great work culture at Yelp, which confirmed my passion to join the company. Also as I'm in a relatively earlier stage of my career, I believe Yelp offers great mixture of a big company with senior engineers to learn and absorb knowledge from but also start up culture where I could contribute a lot and build to make a real difference. I believe this is the best combination of environment to grow as a software engineer.
 
 - Resume Overview
-
-
 - Describe your previous projects
 - Research work
 - What's the biggest difficulty you faced for your projects?
