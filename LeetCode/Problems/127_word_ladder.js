@@ -1,3 +1,5 @@
+//TLE - use character flipping and bidirectional BFS to make it faster.
+
 const oneLetterAway = (word1, word2) => {
   if (Math.abs(word1.length - word2.length) > 1) return false;
   
