@@ -7,19 +7,35 @@ class ListNode {
   }
 }
 
+// iterative
+// const reverseList = head => {
+//   if (!head) return [];
+
+//   let prev = null;
+
+//   while (head) {
+//     let current = head;
+//     head = head.next;
+//     current.next = prev;
+//     prev = current;
+//   }
+
+//   return prev;
+// };
+
+// recursive
 const reverseList = head => {
-  if (!head) return [];
+  return _reverseList(head);
+};
 
-  let prev = null;
+const _reverseList = (head, prev = null) => {
+  if (!head) return prev;
 
-  while (head) {
-    let current = head;
-    head = head.next;
-    current.next = prev;
-    prev = current;
-  }
-
-  return prev;
+  let current = head;
+  head = head.next;
+  current.next = prev;
+  prev = current;
+  return _reverseList(head, prev);
 };
 
 let node1 = new ListNode(1);
