@@ -21,7 +21,7 @@ const longestCommonPrefix = array => {
 
 // NM <- this is slower in Leetcode for some reason?
 function longestCommonPrefix2(array) {
-  if (array.length === 0 || array[0].length === 0) return "";
+  if (array.length === 0) return "";
   
   let longest = "";
   let idx = 0;
@@ -37,8 +37,6 @@ function longestCommonPrefix2(array) {
     longest += currentChar;
     idx += 1;
   }
-
-  return longest;
 }
 
 let array = ["abcowqekopk", "abccccc", "abc", "abwqew"];
