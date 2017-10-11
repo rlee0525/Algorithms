@@ -45,6 +45,32 @@
 ## Babel
 - JavaScript development touches a lot of diverse environments: Node, Chrome, Safari, etc. These various environments have different levels of compatibility with advanced JavaScript features like JSX and ES6. To ensure that our JSX and ES6 code works in any environment, we will use a transpiler called Babel to convert our code into ES5, the universal, vanilla Javascript compatible with all browsers and Node.
 
+## Rails
+- Don’t have to spend a lot of time configuring files in order to get setup as Rails comes with a set of conventions which help speed up development and makes it easier to move between different Rails projects
+- Object-oriented language Ruby and huge open source code community available
+- Easily readable and self-documenting, which increases productivity
+- Emphasis on RESTful application design - popular in current API shifts towards REST design
+- Not as fast as Java although some big organizations such as AirBnB still uses Rails
+
+## MVC
+- The Model-view-controller (MVC) is a software architectural pattern for implementing user interface. This pattern separates concern of data, view, and logic, which allows code to be maintainable. 
+- However, there are limitations to the MVC pattern when the application grow in size. 
+  - Poorly defined data flow: The cascading updates which occur across views often lead to a tangled web of events which is difficult to debug. 
+  - Lack of data integrity: Model data can be mutated from anywhere, yielding unpredictable results across the UI.
+- The **model** is the central component of the pattern. It expresses the application’s behavior in terms of the problem domain, independent of the UI. It directly manages the data, logic, and rules of the application.
+- The **view** can be any output representation of information, such as a chart or a diagram. Multiple views of the same information are possible.
+- The **controller** accepts input and converts it to commands for the model or view.
+
+## SOA (Service-oriented architecture)
+- AKA “microservices” (Modularity on the application level)
+- E.g. Multiple rails app (one for user, one for tweets, etc) -> tweet syntax error won’t break user authentication app
+- Failures can be isolated to particular services without taking down the entire system
+- Easy to divide among teams, a team can keep their codebase small and understandable
+  - Can be written in various languages unlike monolith
+  - Easier to do small refactorings
+  - Harder to do big refactoring across many services
+- A little bit of overhead in messages between apps unlike monolith
+
 
 
 
