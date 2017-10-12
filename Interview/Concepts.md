@@ -71,7 +71,19 @@
   - Harder to do big refactoring across many services
 - A little bit of overhead in messages between apps unlike monolith
 
+## CORS (Cross-Origin Resource Sharing)
+- A resource makes a cross-origin HTTP request when it requests a resource from a different domain, protocol, or port to its own.
+- For security reasons, browsers restrict cross-origin HTTP requests initiated from within scripts.
+- CORS mechanism gives web servers cross-domain access controls, which enable secure cross-domain data transfers.
+- It works by adding new HTTP headers that allow servers to describe the set of origins that are permitted to read that information using a web browser.
 
+## Session Token
+- Session tokens are stored on the client side in the form of JSON object. It is typically stored in the localStorage, which is domain-specific although sometimes stored in sessionStorage and even as a cookie (which is too small and most likely not the case). Session token based authentication allows stateless authorization. Once user enters their login credentials, the server verifies and returns a signed token, which is stored in localStorage. On subsequent requests, this token is included in the header which the server decodes it to be valid and processes the request. Destroyed on the client-side once a user logs out.
+
+## HTTPS & SSL
+- HTTPS is the secure version of HTTP, the protocol over which data is sent between your browser and the website that you are connected to.
+- HTTPS typically uses SSL (Secure Sockets Layer) or TLS (Transport Layer Security) to encrypt all communications between your browser and the website.
+- SSL utilizes asymmetric Public Key Infrastructure (PKI) system, which uses a public key and a private key to encrypt communications. Anything encrypted with the public key can only be decrypted by the private key and vice-versa.
 
 
 
