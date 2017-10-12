@@ -93,6 +93,18 @@
   - Function foo() { } will be hoisted. foo().
   - Var foo = function() {} won’t be. foo().
 
+## Bind / Call / Apply
+- Bind allows you to borrow a method and set the value of this without calling the function. It simply returns an exact copy of the function with new value of this.
+- Bind when you want that function to later be called with a certain context, useful in events.
+- Call or apply when you want to invoke the function immediately and modify the context.
+
+## This
+- At the time of execution in every function, JS engine sets a property to the function called this, which refer to the current execution context. Always refers to an object.
+- If you use “use strict”, immediate invoking function, value of this is undefined.
+
+## Currying
+- Creating a closure that return a function.
+
 ## Join vs. Subqueries
 - A left join can be faster than an equivalent subquery because the server might be able to optimize it better - however this is up to discussion.
 
@@ -223,8 +235,15 @@
     - “#”: Protected (Only be seen within the component)
     - “~”: Package
 
+## Implement LRU Cache
+- Utilize hashmap and linked list
+- Each node in the list will hold a cached object and we’ll always add new nodes to the end of the list. Whenever an object is requested and found in the cache, we’ll move it to the end of the list to maintain the order
+- Once full, we’ll remove oldest node.
+- With linked list, adding, deleting, and updating nodes can be done in constant time
+- However, look up time is the problem as it is linear in time complexity. We can go around this problem by creating a hash map whose keys will be the same keys that we put in our linked list. The values will point to the node object in our linked list - constant lookup time now.
 
-
+## Identifying IP
+- If the users are logged into the website, the easiest way would be obviously by checking session ID. However, websites like Yelp, which has a lot of unregistered users, it could be best served by checking for unique IP addresses. This can be very inaccurate for places that serve a lot of users under same IP address such as libraries or in fact, App Academy, where I used to work at. One way to determine whether two distincts hits belong to the same user or not would be storing randomly generated unique identifier in the client ID field on the browser's’ cookies on load.
 
 
 
