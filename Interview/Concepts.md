@@ -85,7 +85,50 @@
 - HTTPS typically uses SSL (Secure Sockets Layer) or TLS (Transport Layer Security) to encrypt all communications between your browser and the website.
 - SSL utilizes asymmetric Public Key Infrastructure (PKI) system, which uses a public key and a private key to encrypt communications. Anything encrypted with the public key can only be decrypted by the private key and vice-versa.
 
+## Hoisting
+- Hoisting is the JS interpreter’s action of moving all variable and function declarations to the top of the current scope. However, only the actual declarations are hoisted.
+- If variable is declared after it has been used, it won’t raise error but just show as undefined.
+- If variable is never declared, we have a ReferenceError.
+- Function declarations are also hoisted except functions that are assigned to variables.
+  - Function foo() { } will be hoisted. foo().
+  - Var foo = function() {} won’t be. foo().
 
+## Join vs. Subqueries
+- A left join can be faster than an equivalent subquery because the server might be able to optimize it better - however this is up to discussion.
+
+## TCP, UDP, TTL
+- **TCP**: this data must get to the end user. Send request to server to build connection then sends packets in order. Lots of overhead and therefore slower but more secure as delivery is guaranteed and in order.
+  - E.g. WhatsApp - TCP makes sure message is sent to a friend even if s/he is offline at the moment.
+- **UDP**: similar but it’s not in order and no guarantee in delivery. Very low latency compared to TCP but meaning it’s very fast.
+  - E.g. Uber - driver sends their location to Uber every 5 seconds and Uber app sends most recent version of this information to users when they open the app. UDP is preferred for this because this has to happen very fast but guaranteed delivery is not as important as they are constantly sending this information.
+- **TTL**: Time To Live is a mechanism that limits the lifespan of data in network, implemented using timestamps or such. Improve performance of caching or privacy.
+
+## XSS, CSRF
+- **CSRF** (Cross-Site Request Forgery) attack - the attacker tries to force/trick you into making a request which you did not intend.
+- **XSS** (Cross-Site Scripting) attack - the attacker makes you involuntarily execute client-side code, most likely JS.
+
+## Lifecycle of HTTP request. Entering a URL.
+1) Enter a URL into the browser (e.g. facebook.com)
+2) Browser checks cache to see if the requested object or redirect response is in cache and if it is up to date, decodes response (if it’s gzipped) and determines what to do with the response (CDN? render?)
+3) DNS lookup of the IP address for the corresponding domain name
+4) Round-robin DNS - returns multiple IP addresses (multiple for large scale websites like facebook)
+5) Load balancers that listens on a particular IP address and forwards the requests to other servers
+6) Browser opens a TCP connection
+7) The browser then sends a HTTP request to the web server (First check the browser cache. For dynamic pages, which expire very quickly, the browser will send GET request to the Facebook server)
+8) Facebook server responds with a permanent redirect (https://www.facebook.com or even with a backslash at the end <- not much anymore)
+9) Caches the redirect
+10) The browser follows the redirect and sends another GET request to the new domain
+11) The Facebook server will receive the GET request, process it by reading the request, parameters, and cookies to generate a HTML response
+12) The server sends back a HTML response to the browser
+13) Response is cached
+14) The browser begins rendering the HTML
+15) Depending on different scenarios and types of CDN used, the browser parses the HTML file and finds referenced images in it that is located at CDN.
+16) It finds the IP address of CDN, connects to CDN server requesting the image
+17) If the content is in cache and the cache entry hasn’t expired, the content is served directly from the edge server.
+18) Otherwise the edge server makes a request to the origin server to retrieve the information.
+19) If geographically far, instead of sending the picture, it’ll send an HTTP redirect with IP address of CDN that is geographically closer to you. (For initial CDN request)
+20) This redirect step will be cached and all future requests will go to the closest content server
+21) As the browser renders objects embedded in HTML, it will notice tags that require more API requests and keep sending more AJAX requests to communicate with the server.
 
 
 
