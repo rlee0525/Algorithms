@@ -60,3 +60,129 @@ let json = {
 };
 
 console.log(parseObj(json) === "Raymond Lee, Software Engineer, 25, Northwestern University, ");
+
+// two pointer two sum
+const twoSum = function(nums, target) {
+  nums = nums.sort((a, b) => a - b);
+
+  let low = 0;
+  let high = nums.length - 1;
+
+  while (low < high) {
+    if (nums[low] + nums[high] === target) {
+      return true;
+    } else if (nums[low] + nums[high] < target) {
+      low++;
+    } else {
+      high--;
+    }
+  }
+
+  return false;
+};
+
+// faster two sum
+const twoSum = (nums, target) => {
+  let seen = {};
+
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] in seen) return [seen[nums[i]], i];
+    seen[target - nums[i]] = i;
+  }
+
+  return false;
+};
+
+const threeSum = (arr, target) => {
+  arr = arr.sort((a, b) => a - b);
+  let set = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (i === 0 || arr[i] !== arr[i - 1]) {
+      let low = i + 1;
+      let high = arr.length - 1;
+
+      while (low < high) {
+        if (arr[i] + arr[low] + arr[high] === target) {
+          set.push([arr[i], arr[low], arr[high]]);
+          low++;
+          high--;
+
+          while (arr[low] === arr[low - 1]) low++;
+          while (arr[high] === arr[high + 1]) high--;
+        } else if (arr[i] + arr[low] + arr[high] < target) {
+          low++;
+        } else {
+          high--;
+        }
+      }
+    }
+  }
+
+  return set;
+};
+
+const fourSum = (nums, target) => {
+  nums = nums.sort((a, b) => a - b);
+  let set = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    if (i === 0 || nums[i] !== nums[i - 1]) {
+      for (let j = i + 1; j < nums.length; j++) {
+        if (j === i + 1 || nums[j] !== nums[j - 1]) {
+          let low = j + 1;
+          let high = nums.length - 1;
+
+          while (low < high) {
+            if (nums[i] + nums[j] + nums[low] + nums[high] === target) {
+              set.push([nums[i], nums[j], nums[low], nums[high]]);
+              low++;
+              high--;
+
+              while (nums[low] === nums[low - 1]) low++;
+              while (nums[high] === nums[high + 1]) high--;
+            } else if (nums[i] + nums[j] + nums[low] + nums[high] < target) {
+              low++;
+            } else {
+              high--;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return set;
+};
+
+// longest substring without repeating characters
+
+const lengthOfLongestSubstring = string => {
+  let seen = {};
+  let startIdx = 0;
+  let count = 0;
+
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] in seen && seen[string[i]] >= startIdx) {
+      startIdx = seen[string[i]] + 1;
+    } else {
+      count = Math.max(count, i - startIdx + 1);
+    }
+
+    seen[string[i]] = i;
+  }
+
+  return count;
+};
+
+
+
+
+
+
+
+
+
+
+
+
