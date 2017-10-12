@@ -245,7 +245,16 @@
 ## Identifying IP
 - If the users are logged into the website, the easiest way would be obviously by checking session ID. However, websites like Yelp, which has a lot of unregistered users, it could be best served by checking for unique IP addresses. This can be very inaccurate for places that serve a lot of users under same IP address such as libraries or in fact, App Academy, where I used to work at. One way to determine whether two distincts hits belong to the same user or not would be storing randomly generated unique identifier in the client ID field on the browser's’ cookies on load.
 
-
+## Static vs. Dynamic Typing
+- https://stackoverflow.com/questions/1517582/what-is-the-difference-between-statically-typed-and-dynamically-typed-languages
+- Statically typed programming languages
+  - C and Java
+  - Do type checking (the process of verifying and enforcing the constraints of types) at compile-time.
+  - All kinds of checking can be done by the compiler and therefore a lot of trivial bugs are caught at a very early stage.
+- Dynamically typed programming languages
+  - Ruby, JavaScript, and Python
+  - Do type checking at run-time as opposed to Compile-time.
+  - As a programmer it's quicker to write as you don't have to specify types every time.
 
 
 
