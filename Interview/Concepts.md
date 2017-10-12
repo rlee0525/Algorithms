@@ -131,8 +131,25 @@
 21) As the browser renders objects embedded in HTML, it will notice tags that require more API requests and keep sending more AJAX requests to communicate with the server.
 
 
+## Slow loading
+- Frontend
+  - Utilize CSS Sprites - It lowers the number of HTTP requests needed to render a webpage. If we have “fast” internet connection, rather than doing multiple HTTP requests to get small contents and wait for the round-trip to the server each time, we can use CSS sprite to minimize the number of trips to the server and use the time to download a bigger file.
+  - Use CDN (Content Delivery Network) to host static contents such as images, JavaScript files, and CSS files - geographically closer location to these data centers increases download speed
+  - In all of my recent projects, I utilized webpack to compile all the JavaScript files and react components. However, one can actually utilize code splitting, also with webpack, to improve performance in initial load speed by loading only what is necessary on that page.
+  - Caching on client side also can help speed up the loading speed as it prevents making unnecessary requests to the DB. By utilizing WebStorages or cookies and cache-control headers, we can cache both static and dynamic files and components.
+    - Web Caching: storing of HTTP responses temporarily for fast retrieval later on.
+    - Reduces the number of requests made to the server.
+    - Caching mechanism: using caching meta tags or HTTP caching headers - decrease the bandwidth usage and also web server overload.
+    - Unlike Redis / Memcached, which stores K-V pair in RAM a copy of the information on the disk of the whole page, browser cache stores resources like images, JS on your hard-drive for quicker access of these static resources on reload.
+    - Make sure to clearly differentiate between server-side caching (Redis / Memcached) and browser caching (CDN, cache-control headers, cookies, static assets, JS, CSS)
+- Backend
+  - In terms of BE, the first step would be to making sure the DB is properly designed. One such example would be getting rid of N + 1 queries. For example, in a Rails app, you could implement eager loading by utilizing Active Record’s includes method to reduce number of queries made for often used associations.
+  - Also, while not easily scalable, depending on the situation, you could consider denormalizing the database to improve read speed. Once again, this makes it hard to keep data in sync but if conducted properly, it would be very helpful
+  - Most practical and obvious solution would be also utilizing caching mechanism as well. By utilizing Redis or memcached, one can store popular restaurants to avoid having to constantly hitting the DB. Utilizing LRU caching could help the process but some factors to consider here are what are the information that are essential to be up to date as to static contents. E.g. Restaurant info? Photos? Reviews?
 
-
+## Singleton
+- Only one instance of the class can be created.
+- The Singleton pattern is used to design the classes which provides the configuration settings for an application. By implementing configuration classes as Singleton not only that we provide a global access point, but we also keep the instance we use as a cache object.
 
 
 
