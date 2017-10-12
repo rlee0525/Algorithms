@@ -200,7 +200,28 @@
 - **Interface** defines capabilities that we promise to provide by establishing a contract about what the object can do. It’s only a promise to provide the state or functionality and cannot be shared because there is no defined information to be shared. Interfaces are useful since they capture similarity between unrelated objects without forcing a class relationship. “Describe the behavior”
 - “Interfaces do not express something like “a Doberman is a type of dog and every dog can walk” but more like “this thing can walk”.
 
-
+## UML
+- Define UML (https://www.codeproject.com/Articles/28445/UML-Interview-Questions-Part#DefineUML)
+- Unified Modeling Language, a standard language for designing and documenting a system in an object-oriented manner. It has nine diagrams which can be used in design document to express design of software architecture.
+- Why UML?
+  - Easy to keep the team on the same page (especially for the new hires when the senior engineers leave)
+  - In a complicated system, provides a roadmap
+- Define Use Case Diagrams
+  - It answers what system does from the user point of view, to depict clarity regarding a system.
+  - Scenario: A sequence of events which happen when a user interacts with the system
+  - Actor: The end user (Primary: initiate the use case, secondary passively participates)
+  - Use Case: The goal performed by the end user.
+    - Include: Include relationship represents an invocation of on use case by the other. (One function called by another function)
+    - Extend: Exactly like the base use case but with some new steps inserted.
+- Class Diagram
+  - It is basically a prototype which helps us create objects. Class defines the static structure of the project.
+    - Class name
+    - Attributes (Properties of the system)
+    - Methods (Methods to act on the attributes)
+    - “+”: Public
+    - “-”: Private (Cannot be accessed outside the class)
+    - “#”: Protected (Only be seen within the component)
+    - “~”: Package
 
 
 
