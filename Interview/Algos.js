@@ -176,10 +176,51 @@ const lengthOfLongestSubstring = string => {
 };
 
 
+// 3) Longest common prefix
 
+const longestCommonPrefix = array => {
+  let first = array[0];
+  let prefix = "";
 
+  if (array.length < 1) return prefix;
 
+  for (let i = 0; i < first.length; i++) {
+    for (let j = 0; j < array.length; j++) {
+      let current = first[i];
+      
+      if (!array[j][i] || array[j][i] !== current) return prefix;
+    }
 
+    prefix += first[i];
+  }
+
+  return prefix;
+};
+
+// 4) Group Anagrams
+
+const groupAnagrams = array => {
+  let groups = {};
+
+  for (let i = 0; i < array.length; i++) {
+    let sorted = array[i].split("").sort().join("");
+    
+    if (sorted in groups) {
+      groups[sorted].push(array[i]);
+    } else {
+      groups[sorted] = [array[i]];
+    }
+  }
+
+  let group;
+  let res = [];
+
+  for (group in groups) {
+    res.push(groups[group]);
+  }
+
+  return res;
+};
 
 
 
