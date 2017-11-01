@@ -23,6 +23,7 @@
 - Protected can be accessed by this class and any subclasses of this class.
 
 ## Redux
+- When building a Single Page Application (SPA) from components you end up storing some sort of state. When using React or similar frameworks, at some point you have to terminate network calls for data, place them onto a variable, and expose them to your markup for each component. Over time managing state on components becomes complex because you have to keep passing data structures between components and this creates a coupling issue. Redux allows you to consolidate down all your state into a single location and define a set of inputs and outputs. This concept helps you conform to the Separation of Concerns principle of software design (SOC).
 - Redux is a JavaScript framework for managing the frontend state of a web application, allowing us to store information organized and quickly insert and retrieve that information.
 - It is also very predictable as it helps you write apps that behave consistently. The state can only be modified by dispatching actions that are made with pure functions called reducers.
 - Redux middlewares allows async actions, logging, and so on.
