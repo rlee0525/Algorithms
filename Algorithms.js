@@ -50,6 +50,53 @@ let json2 = {
 
 console.log(parseObj(json2) === "Raymond Lee, Software Engineer, 25, Northwestern University, ");
 
+// 3) Highest Average
+const highestAverage = arr => {
+  let scores = {};
+
+  for (let i = 0; i < arr.length; i++) {
+    let currentName = arr[i][0];
+    let currentScore = arr[i][1];
+
+    if (currentName in scores) {
+      scores[currentName].push(currentScore);
+    } else {
+      scores[currentName] = [currentScore];
+    }
+  }
+
+  let bestAverage = 0;
+  let person, bestPerson;
+
+  for (person in scores) {
+    let currentAverage = 0;
+
+    for (let i = 0; i < scores[person].length; i++) {
+      currentAverage += parseInt(scores[person][i]);
+    }
+
+    currentAverage = currentAverage / scores[person].length;
+    if (bestAverage <= currentAverage) {
+      bestAverage = currentAverage;
+      bestPerson = person;
+    }
+  }
+
+  return [bestPerson, bestAverage];
+};
+
+let scores3 = [
+  ["Charles", '100'],
+  ["Adam", '35'],
+  ["Susan", '55'],
+  ["Charles", '50']
+];
+
+console.log(highestAverage(scores3)); // ['Charles', 75]
+
 // Medium
+// 1) Count Steps
+
+
 
 // Hard
