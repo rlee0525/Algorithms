@@ -96,7 +96,36 @@ console.log(highestAverage(scores3)); // ['Charles', 75]
 
 // Medium
 // 1) Count Steps
+const countStepsRec = n => {
+  if (n < 1) return 0;
 
+  let steps = [1, 2, 4];
 
+  if (n < 4) return steps[n - 1];
+
+  return countStepsRec(n - 1) + countStepsRec(n - 2) + countStepsRec(n - 3);
+};
+
+console.log(countStepsRec(4) === 7);
+console.log(countStepsRec(6) === 24);
+console.log(countStepsRec(10) === 274);
+
+const countSteps = (n, dp = {}) => {
+  if (n < 1) return 0;
+  
+  dp[1] = 1;
+  dp[2] = 2;
+  dp[3] = 4;
+
+  if (n in dp) return dp[n];
+  dp[n] = countSteps(n - 1, dp) + countSteps(n - 2, dp) + countSteps(n - 3, dp);
+
+  return dp[n];
+};
+
+console.log(countSteps(4) === 7);
+console.log(countSteps(6) === 24);
+console.log(countSteps(10) === 274);
+console.log(countSteps(36) === 2082876103);
 
 // Hard
