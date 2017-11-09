@@ -95,7 +95,7 @@ let scores3 = [
 console.log(highestAverage(scores3)); // ['Charles', 75]
 
 // 4) GG BFS for a Graph
-class simpleGraph {
+class simpleGraphBFS {
   constructor() {
     this.graph = {};
   }
@@ -130,7 +130,7 @@ class simpleGraph {
   }
 }
 
-let g = new simpleGraph();
+let g = new simpleGraphBFS();
 g.addEdge(0, 1);
 g.addEdge(0, 2);
 g.addEdge(1, 2);
@@ -139,6 +139,50 @@ g.addEdge(2, 3);
 g.addEdge(3, 3);
 
 console.log(g.graphBFS(2)); // [2, 0, 3, 1]
+
+// 5) GG DFS for a graph
+class simpleGraphDFS {
+  constructor() {
+    this.edges = {};
+  }
+
+  addEdge(s, e) {
+    if (s in this.edges) {
+      this.edges[s].push(e);
+    } else {
+      this.edges[s] = [e];
+    }
+  }
+
+  graphDFS(s) {
+    let res = [];
+    this._utilDFS(s, res);
+    return res;
+  }
+
+  _utilDFS(s, res, visited = {}) {
+    res.push(s);
+    visited[s] = true;
+    
+    for (let i = 0; i < this.edges[s].length; i++) {
+      let current = this.edges[s][i];
+
+      if (!(current in visited)) {
+        this._utilDFS(current, res, visited);
+      }
+    }
+  }
+}
+
+let g2 = new simpleGraphDFS();
+g2.addEdge(0, 1);
+g2.addEdge(0, 2);
+g2.addEdge(1, 2);
+g2.addEdge(2, 0);
+g2.addEdge(2, 3);
+g2.addEdge(3, 3);
+
+console.log(g2.graphDFS(2)); // [2, 0, 1, 3]
 
 // Medium
 // 1) Count Steps, 1, 2, or 3 steps at a time.
