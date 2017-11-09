@@ -94,6 +94,52 @@ let scores3 = [
 
 console.log(highestAverage(scores3)); // ['Charles', 75]
 
+// 4) GG BFS for a Graph
+class simpleGraph {
+  constructor() {
+    this.graph = {};
+  }
+
+  addEdge(s, e) {
+    if (s in this.graph) {
+      this.graph[s].push(e);
+    } else {
+      this.graph[s] = [e];
+    }
+  }
+
+  graphBFS(s) {
+    let queue = [s];
+    let res = [];
+    let visited = {};
+
+    while (queue.length !== 0) {
+      let current = queue[0];
+      queue = queue.slice(1, queue.length);
+      res.push(current);
+      visited[current] = true;
+
+      for (let i = 0; i < this.graph[current].length; i++) {
+        if (!(this.graph[current][i] in visited)) {
+          queue.push(this.graph[current][i]);
+        }
+      }
+    }
+
+    return res;
+  }
+}
+
+let g = new simpleGraph();
+g.addEdge(0, 1);
+g.addEdge(0, 2);
+g.addEdge(1, 2);
+g.addEdge(2, 0);
+g.addEdge(2, 3);
+g.addEdge(3, 3);
+
+console.log(g.graphBFS(2)); // [2, 0, 3, 1]
+
 // Medium
 // 1) Count Steps, 1, 2, or 3 steps at a time.
 const countStepsRec = n => {
@@ -147,15 +193,17 @@ console.log(findMedianEasy([0, 1, 4, 5], [3, 10, 100]) === 4);
 console.log(findMedianEasy([0, 1, 2, 4, 5], [3, 10, 100]) === 3.5);
 
 const findMedianSortedArrays = (arr1, arr2) => {
-  let len = arr1.length + arr2.length;
-  return (getKth(arr1, arr2, Math.floor((len - 1) / 2)) + getKth(arr1, arr2, Math.floor(len / 2))) / 2;
+  let total = arr1.length + arr2.length;
+  let left = getKth(arr1, arr2, Math.floor((total - 1) / 2));
+  let right = getKth(arr1, arr2, Math.floor(total / 2));
+
+  return (left + right) / 2;
 };
 
 const getKth = (arr1, arr2, k) => {
   if (arr1.length > arr2.length) return getKth(arr2, arr1, k);
-
   if (arr1.length === 0) return arr2[k];
-  if (k === arr1.length + arr2.length - 1) {
+  if (k === (arr1.length + arr2.length - 1)) {
     return Math.max(arr1[arr1.length - 1], arr2[arr2.length - 1]);
   }
 
@@ -198,17 +246,17 @@ class BinaryTree {
 
   addNode(interval) {
     if (interval.startTime < this.interval.startTime) {
-      const newInterval = new Interval(interval.startTime, Math.min(interval.endTime, this.interval.startTime), interval.price);
+      let newInterval = new Interval(interval.startTime, Math.min(interval.endTime, this.interval.startTime), interval.price);
 
       if (this.left) {
         this.left.addNode(newInterval);
       } else {
-        this.left = new BinaryTree(newInterval);
+        this.left = new BinaryTree (newInterval);
       }
     }
 
     if (interval.endTime > this.interval.endTime) {
-      const newInterval = new Interval(Math.max(interval.startTime, this.interval.endTime), interval.endTime, interval.price);
+      let newInterval = new Interval(Math.max(interval.startTime, this.interval.endTime), interval.endTime, interval.price);
 
       if (this.right) {
         this.right.addNode(newInterval);
@@ -231,29 +279,30 @@ class BinaryTree {
   }
 
   inOrder() {
-    const results = [];
+    let results = [];
     this._traverse(results);
     return results;
   }
 }
 
-const getLowestPrices = (inputIntervals) => {
+const getLowestPrices = inputIntervals => {
   inputIntervals = inputIntervals.sort((a, b) => a.price - b.price);
-  const root = inputIntervals[0];
-  const tree = new BinaryTree(root);
+  let tree = new BinaryTree(inputIntervals[0]);
 
-  for (let i = 0; i < inputIntervals.length; i++) {
+  for (let i = 1; i < inputIntervals.length; i++) {
     tree.addNode(inputIntervals[i]);
   }
 
   return tree.inOrder();
 };
 
+
 let sampleInput = [new Interval(1, 5, 20), new Interval(3, 4, 15)];
+let sampleInput2 = [new Interval(1, 5, 20), new Interval(1, 5, 15)];
+let sampleInput3 = [new Interval(1, 5, 20), new Interval(2, 5, 17), new Interval(4, 6, 15)];
 console.log(getLowestPrices(sampleInput)); // [new Interval(1, 3, 20), new Interval(3, 4, 15), new Interval(4, 5, 20)]
-
-
-
+console.log(getLowestPrices(sampleInput2)); // [new Interval(1, 5, 15)]
+console.log(getLowestPrices(sampleInput3)); // [new Interval(1, 2, 20), new Interval(2, 4, 17), new Interval(4, 6, 15)]
 
 
 
