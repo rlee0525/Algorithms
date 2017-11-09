@@ -182,9 +182,75 @@ console.log(findMedianSortedArrays([0, 1, 2, 4, 5], [3, 10, 100]) === 3.5);
 console.log(findMedianSortedArrays([0], [1, 2, 3, 10, 100]) === 2.5);
 console.log(findMedianSortedArrays([0, 1, 5, 7, 9, 10, 11, 12], [3, 4]) === 6);
 
+// 2) Get Lowest Price
+class Interval {
+  constructor(startTime, endTime, price) {
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.price = price;
+  }
+}
 
+class BinaryTree {
+  constructor(interval) {
+    this.interval = interval;
+  }
 
+  addNode(interval) {
+    if (interval.startTime < this.interval.startTime) {
+      const newInterval = new Interval(interval.startTime, Math.min(interval.endTime, this.interval.startTime), interval.price);
 
+      if (this.left) {
+        this.left.addNode(newInterval);
+      } else {
+        this.left = new BinaryTree(newInterval);
+      }
+    }
+
+    if (interval.endTime > this.interval.endTime) {
+      const newInterval = new Interval(Math.max(interval.startTime, this.interval.endTime), interval.endTime, interval.price);
+
+      if (this.right) {
+        this.right.addNode(newInterval);
+      } else {
+        this.right = new BinaryTree(newInterval);
+      }
+    }
+  }
+
+  _traverse(results) {
+    if (this.left) {
+      this.left._traverse(results);
+    }
+
+    results.push(this.interval);
+
+    if (this.right) {
+      this.right._traverse(results);
+    }
+  }
+
+  inOrder() {
+    const results = [];
+    this._traverse(results);
+    return results;
+  }
+}
+
+const getLowestPrices = (inputIntervals) => {
+  inputIntervals = inputIntervals.sort((a, b) => a.price - b.price);
+  const root = inputIntervals[0];
+  const tree = new BinaryTree(root);
+
+  for (let i = 0; i < inputIntervals.length; i++) {
+    tree.addNode(inputIntervals[i]);
+  }
+
+  return tree.inOrder();
+};
+
+let sampleInput = [new Interval(1, 5, 20), new Interval(3, 4, 15)];
+console.log(getLowestPrices(sampleInput)); // [new Interval(1, 3, 20), new Interval(3, 4, 15), new Interval(4, 5, 20)]
 
 
 
