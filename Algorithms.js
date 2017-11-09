@@ -136,9 +136,9 @@ const findMedianEasy = (arr1, arr2) => {
   let middle = Math.floor(newArr.length / 2);
 
   if (newArr.length % 2 === 0) {
-    return (newArr[middle] + newArr[middle - 1]) / 2;
+    return (newArr[middle - 1] + newArr[middle]) / 2;
   } else {
-    return newArr[middle];
+    return (newArr[middle]);
   }
 };
 
@@ -146,98 +146,33 @@ console.log(findMedianEasy([0, 1, 2, 3], [4, 5, 10]) === 3);
 console.log(findMedianEasy([0, 1, 4, 5], [3, 10, 100]) === 4);
 console.log(findMedianEasy([0, 1, 2, 4, 5], [3, 10, 100]) === 3.5);
 
-const findMedian = (arr1, arr2) => {
-  let totalLength = arr1.length + arr2.length;
-  let median = Math.floor(totalLength / 2);
-
-  if (totalLength % 2 === 0) {
-    return (findKthSmallest(arr1, arr2, median) + findKthSmallest(arr1, arr2, median - 1)) / 2;
-  } else {
-    return findKthSmallest(arr1, arr2, median);
-  }
+const findMedianSortedArrays = (arr1, arr2) => {
+  let len = arr1.length + arr2.length;
+  return (getKth(arr1, arr2, Math.floor((len - 1) / 2)) + getKth(arr1, arr2, Math.floor(len / 2))) / 2;
 };
 
-const findKthSmallest = (arr1, arr2, k) => {
-  if (arr1.length > arr2.length) {
-    let temp = arr1;
-    arr1 = arr2;
-    arr2 = temp;
-  }
+const getKth = (arr1, arr2, k) => {
+  if (arr1.length > arr2.length) return getKth(arr2, arr1, k);
 
-  if (arr1.length === 0) {
-    return arr2[k];
-  }
-
+  if (arr1.length === 0) return arr2[k];
   if (k === arr1.length + arr2.length - 1) {
     return Math.max(arr1[arr1.length - 1], arr2[arr2.length - 1]);
   }
 
-  let idx1 = Math.min(arr1.length - 1, Math.floor(k / 2));
-  let idx2 = Math.min(arr2.length - 1, k - idx1);
+  let mid1 = Math.floor(arr1.length / 2);
+  let mid2 = k - mid1;
 
-  if (arr1[idx1] < arr2[idx2]) {
-    arr1 = arr1.slice(idx1, arr1.length);
-    arr2 = arr2.slice(0, idx2);
-    return findKthSmallest(arr1, arr2, idx2);
+  if (arr1[mid1] < arr2[mid2]) {
+    arr1 = arr1.slice(mid1, arr1.length);
+    arr2 = arr2.slice(0, mid2);
+
+    return getKth(arr1, arr2, mid2);
   } else {
-    arr1 = arr1.slice(0, idx1);
-    arr2 = arr2.slice(idx2, arr2.length);
-    return findKthSmallest(arr1, arr2, idx1);
+    arr1 = arr1.slice(0, mid1);
+    arr2 = arr2.slice(mid2, arr2.length);
+
+    return getKth(arr1, arr2, mid1);
   }
-};
-
-console.log(findMedian([0, 1, 2, 3], [4, 5, 10]) === 3);
-console.log(findMedian([0, 1, 4, 5], [3, 10, 100]) === 4);
-console.log(findMedian([1, 2], [3, 4]) === 2.5);
-console.log(findMedian([0, 1, 2, 4, 5], [3, 10, 100]) === 3.5);
-console.log(findMedian([0], [1, 2, 3, 10, 100]) === 2.5);
-console.log(findMedian([0, 1, 5, 7, 9, 10, 11, 12], [3, 4]) === 6);
-
-const findMedianSortedArrays = (arr1, arr2) => {
-  if (arr1.length > arr2.length) return findMedianSortedArrays(arr2, arr1);
-  
-  let len1 = arr1.length;
-  let len2 = arr2.length;
-  let iMin = 0;
-  let iMax = len1;
-  let halfLen = Math.floor((len1 + len2 + 1) / 2);
-  
-  while (iMin <= iMax) {
-    let i = Math.floor((iMin + iMax) / 2);
-    let j = halfLen - i;
-    
-    if (i < len1 && arr2[j - 1] > arr1[i]) {
-      iMin = i + 1;
-    } else if (i > 0 && arr1[i - 1] > arr2[j]) {
-      iMax = i - 1;
-    } else {
-      let maxLeft;
-      
-      if (i === 0) {
-        maxLeft = arr2[j - 1];
-      } else if (j === 0) {
-        maxLeft = arr1[i - 1];
-      } else {
-        maxLeft = Math.max(arr1[i - 1], arr2[j - 1]);
-      }
-      
-      if ((len1 + len2) % 2 === 1) return maxLeft;
-      
-      let minRight;
-      
-      if (i === len1) {
-        minRight = arr2[j];
-      } else if (j === len2) {
-        minRight = arr1[i];
-      } else {
-        minRight = Math.min(arr2[j], arr1[i]);
-      }
-
-      return (maxLeft + minRight) / 2;
-    }
-  }
-
-  return -1;
 };
 
 console.log(findMedianSortedArrays([0, 1, 2, 3], [4, 5, 10]) === 3);
@@ -246,6 +181,19 @@ console.log(findMedianSortedArrays([1, 2], [3, 4]) === 2.5);
 console.log(findMedianSortedArrays([0, 1, 2, 4, 5], [3, 10, 100]) === 3.5);
 console.log(findMedianSortedArrays([0], [1, 2, 3, 10, 100]) === 2.5);
 console.log(findMedianSortedArrays([0, 1, 5, 7, 9, 10, 11, 12], [3, 4]) === 6);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
