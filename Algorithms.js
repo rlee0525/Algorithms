@@ -379,7 +379,6 @@ class DijkstraGraph {
 
   dijkstra(s) {
     let cost = {}, prev = {}, queue = {};
-    let length = Object.keys(this.vertices).length;
 
     for (let vertex in this.vertices) {
       cost[vertex] = 1.0 / 0.0;
@@ -406,6 +405,12 @@ class DijkstraGraph {
     return cost;
   }
 }
+
+// 1) initialize all cost as inifinite
+// 2) start with source as 0 cost
+// 3) find minimum cost from the vertices
+// 4) check its neighbors and compare the cost to itself and by going through the source
+// 5) replace it for the smaller cost
 
 let g3 = new DijkstraGraph();
 g3.addVertex("A");
