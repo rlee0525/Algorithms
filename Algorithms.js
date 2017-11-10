@@ -355,25 +355,21 @@ class DijkstraGraph {
     this.vertices = {};
   }
 
-  addVertex(val) {
-    this.vertices[val] = [];
+  addVertex(v) {
+    this.vertices[v] = {};
   }
 
   addEdge(s, e, c) {
-    if (s in this.vertices) {
-      this.vertices[s][e] = c;
-    } else {
-      this.vertices[s] = {e: c};
-    }
+    this.vertices[s][e] = c;
   }
 
-  _extractMin(queue, dist) {
-    let minDistance = 1.0 / 0.0;
+  _extractMin(queue, cost) {
+    let minCost = 1.0 / 0.0;
     let minVertex;
 
     for (let vertex in queue) {
-      if (dist[vertex] <= minDistance) {
-        minDistance = dist[vertex];
+      if (cost[vertex] < minCost) {
+        minCost = cost[vertex];
         minVertex = vertex;
       }
     }
@@ -382,32 +378,32 @@ class DijkstraGraph {
   }
 
   dijkstra(s) {
-    let queue = {}, dist = {}, prev = {};
+    let cost = {}, prev = {}, queue = {};
     let length = Object.keys(this.vertices).length;
 
     for (let vertex in this.vertices) {
-      dist[vertex] = 1.0 / 0.0;
+      cost[vertex] = 1.0 / 0.0;
       prev[vertex] = null;
       queue[vertex] = this.vertices[vertex];
     }
 
-    dist[s] = 0;
+    cost[s] = 0;
 
     while (Object.keys(queue).length !== 0) {
-      let minVertex = this._extractMin(queue, dist);
+      let minVertex = this._extractMin(queue, cost);
       delete queue[minVertex];
-      
-      for (let neighbor in this.vertices[minVertex]) {
-        let newDistance = dist[minVertex] + this.vertices[minVertex][neighbor];
 
-        if (newDistance < dist[neighbor]) {
-          dist[neighbor] = newDistance;
+      for (let neighbor in this.vertices[minVertex]) {
+        let newCost = cost[minVertex] + this.vertices[minVertex][neighbor];
+
+        if (newCost < cost[neighbor]) {
+          cost[neighbor] = newCost;
           prev[neighbor] = minVertex;
         }
       }
     }
 
-    return dist;
+    return cost;
   }
 }
 
