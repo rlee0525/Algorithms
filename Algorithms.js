@@ -1,5 +1,5 @@
 // Easy
-// 1) Second smallest in an array
+// Second smallest in an array
 const secondSmallest = arr => {
   let smallest = 1.0 / 0.0;
   let second = 1.0 / 0.0;
@@ -20,7 +20,7 @@ const secondSmallest = arr => {
 
 console.log(secondSmallest([2, 10, 4, 35, -1, 20, 33, 100]) === 2);
 
-// 2) Parse object unless it's a number
+// Parse object unless it's a number
 const parseObj = obj => {
   let res = [];
   let key;
@@ -50,7 +50,7 @@ let json2 = {
 
 console.log(parseObj(json2) === "Raymond Lee, Software Engineer, 25, Northwestern University, ");
 
-// 3) Highest average test score and the student's name
+// Highest average test score and the student's name
 const highestAverage = arr => {
   let scores = {};
 
@@ -94,7 +94,7 @@ let scores3 = [
 
 console.log(highestAverage(scores3)); // ['Charles', 75]
 
-// 4) GG BFS for a Graph
+// GG BFS for a Graph
 class simpleGraphBFS {
   constructor() {
     this.graph = {};
@@ -140,7 +140,7 @@ g.addEdge(3, 3);
 
 console.log(g.graphBFS(2)); // [2, 0, 3, 1]
 
-// 5) GG DFS for a graph
+// GG DFS for a graph
 class simpleGraphDFS {
   constructor() {
     this.edges = {};
@@ -185,7 +185,7 @@ g2.addEdge(3, 3);
 console.log(g2.graphDFS(2)); // [2, 0, 1, 3]
 
 // Medium
-// 1) Count Steps, 1, 2, or 3 steps at a time.
+// Count Steps, 1, 2, or 3 steps at a time.
 const countStepsRec = n => {
   if (n < 1) return 0;
 
@@ -219,7 +219,7 @@ console.log(countSteps(10) === 274);
 console.log(countSteps(36) === 2082876103);
 
 // Hard
-// 1) Find median given two sorted arrays
+// Find median given two sorted arrays
 const findMedianEasy = (arr1, arr2) => {
   let newArr = arr1.concat(arr2);
   newArr = newArr.sort((a, b) => a - b);
@@ -274,7 +274,7 @@ console.log(findMedianSortedArrays([0, 1, 2, 4, 5], [3, 10, 100]) === 3.5);
 console.log(findMedianSortedArrays([0], [1, 2, 3, 10, 100]) === 2.5);
 console.log(findMedianSortedArrays([0, 1, 5, 7, 9, 10, 11, 12], [3, 4]) === 6);
 
-// 2) Get Lowest Price
+// Get Lowest Price
 class Interval {
   constructor(startTime, endTime, price) {
     this.startTime = startTime;
@@ -348,8 +348,81 @@ console.log(getLowestPrices(sampleInput)); // [new Interval(1, 3, 20), new Inter
 console.log(getLowestPrices(sampleInput2)); // [new Interval(1, 5, 15)]
 console.log(getLowestPrices(sampleInput3)); // [new Interval(1, 2, 20), new Interval(2, 4, 17), new Interval(4, 6, 15)]
 
+// GG Dijkstra graph
+// Given a graph and a source vertex in graph, find shortest paths from source to all vertices in the given graph.
+class DijkstraGraph {
+  constructor() {
+    this.vertices = {};
+  }
 
+  addVertex(val) {
+    this.vertices[val] = [];
+  }
 
+  addEdge(s, e, c) {
+    if (s in this.vertices) {
+      this.vertices[s][e] = c;
+    } else {
+      this.vertices[s] = {e: c};
+    }
+  }
+
+  _extractMin(queue, dist) {
+    let minDistance = 1.0 / 0.0;
+    let minVertex;
+
+    for (let vertex in queue) {
+      if (dist[vertex] <= minDistance) {
+        minDistance = dist[vertex];
+        minVertex = vertex;
+      }
+    }
+
+    return minVertex;
+  }
+
+  dijkstra(s) {
+    let queue = {}, dist = {}, prev = {};
+    let length = Object.keys(this.vertices).length;
+
+    for (let vertex in this.vertices) {
+      dist[vertex] = 1.0 / 0.0;
+      prev[vertex] = null;
+      queue[vertex] = this.vertices[vertex];
+    }
+
+    dist[s] = 0;
+
+    while (Object.keys(queue).length !== 0) {
+      let minVertex = this._extractMin(queue, dist);
+      delete queue[minVertex];
+      
+      for (let neighbor in this.vertices[minVertex]) {
+        let newDistance = dist[minVertex] + this.vertices[minVertex][neighbor];
+
+        if (newDistance < dist[neighbor]) {
+          dist[neighbor] = newDistance;
+          prev[neighbor] = minVertex;
+        }
+      }
+    }
+
+    return dist;
+  }
+}
+
+let g3 = new DijkstraGraph();
+g3.addVertex("A");
+g3.addVertex("B");
+g3.addVertex("C");
+g3.addVertex("D");
+g3.addEdge("A", "B", 10);
+g3.addEdge("A", "C", 5);
+g3.addEdge("C", "B", 3);
+g3.addEdge("A", "D", 9);
+g3.addEdge("C", "D", 2);
+
+console.log(g3.dijkstra("A")); // {"A": 0, "C": 5, "D": 7, "B": 8}
 
 
 
