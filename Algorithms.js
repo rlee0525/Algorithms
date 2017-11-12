@@ -767,6 +767,16 @@ const hasCycle = head => {
   return false;
 };
 
+// Given a binary tree, determine if it is a valid binary search tree (BST).
+const isValidBST = (root, min = -1.0 / 0.0, max = 1.0 / 0.0) => {
+  if (!root) return true;
+  if (root.val <= min || root.val >= max) return false;
+
+  return isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);
+};
+
+
+
 // Find the middle element of a linked list
 
 
