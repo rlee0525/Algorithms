@@ -1,4 +1,3 @@
-// Easy
 // Second smallest in an array
 const secondSmallest = arr => {
   let smallest = 1.0 / 0.0;
@@ -184,7 +183,6 @@ g2.addEdge(3, 3);
 
 console.log(g2.graphDFS(2)); // [2, 0, 1, 3]
 
-// Medium
 // Count Steps, 1, 2, or 3 steps at a time.
 const countStepsRec = n => {
   if (n < 1) return 0;
@@ -218,7 +216,6 @@ console.log(countSteps(6) === 24);
 console.log(countSteps(10) === 274);
 console.log(countSteps(36) === 2082876103);
 
-// Hard
 // Find median given two sorted arrays
 const findMedianEasy = (arr1, arr2) => {
   let newArr = arr1.concat(arr2);
@@ -426,12 +423,85 @@ g3.addEdge("C", "D", 2);
 console.log(g3.dijkstra("A")); // {"A": 0, "C": 5, "D": 7, "B": 8}
 
 
+// Implement Trie
+class TrieNode {
+  constructor() {
+    this.children = {};
+    this.isWord = false;
+  }
+}
 
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
+  }
 
+  insert(word) {
+    let current = this.root;
 
+    for (let i = 0; i < word.length; i++) {
+      if (!(word[i] in current.children)) {
+        current.children[word[i]] = new TrieNode;
+      }
 
+      current = current.children[word[i]];
+    }
 
+    current.isWord = true;
+  }
 
+  search(word) {
+    let current = this.root;
 
+    for (let i = 0; i < word.length; i++) {
+      if (!(word[i] in current.children)) return false;
+
+      current = current.children[word[i]];
+    }
+
+    return current.isWord;
+  }
+
+  startsWith(prefix) {
+    let current = this.root;
+
+    for (let i = 0; i < prefix.length; i++) {
+      if (!(prefix[i] in current.children)) return false;
+      current = current.children[prefix[i]];
+    }
+
+    return true;
+  }
+}
+
+// Implement LRU Cache
+
+// Implement in-place quicksort
+
+// Implement merge sort
+
+// Implement heaps
+
+// Fibonacci recursive and iterative
+
+// Determine if two words are anagrams
+
+// 3. Longest Substring Without Repeating Characters
+
+// 467. Unique Substrings in Wraparound String
+
+// Two sum
+
+// Find the first unique character of a given String.  
+
+// Find the middle element of a linked list
+
+// Simple bit manipulation question
+
+// How do you reverse a linked list? Also in place.
+
+// OOP Concepts
+
+// Buy and sell stocks
 
 
