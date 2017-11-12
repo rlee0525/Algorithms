@@ -845,6 +845,27 @@ const romanToInt = s => {
   return res;
 };
 
+// Group anagrams
+const groupAnagrams = arr => {
+  let res = [];
+  let groups = {};
+
+  for (let i = 0; i < arr.length; i++) {
+    let sortedStr = arr[i].split("").sort().join("");
+
+    if (sortedStr in groups) {
+      groups[sortedStr].push(arr[i]);
+    } else {
+      groups[sortedStr] = [arr[i]];
+    }
+  }
+
+  for (let group in groups) {
+    res.push(groups[group]);
+  }
+
+  return res;
+};
 
 // Implement in-place quicksort
 
