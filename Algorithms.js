@@ -867,6 +867,28 @@ const groupAnagrams = arr => {
   return res;
 };
 
+// Merge Intervals
+const merge = intervals => {
+  if (intervals.length === 0) return [];
+  intervals = intervals.sort((a, b) => a.start - b.start);
+
+  let merged = [];
+  let current = intervals[0];
+
+  for (let i = 1; i < intervals.length; i++) {
+    if (intervals[i].start <= current.end) {
+      current = new Interval(current.start, Math.max(intervals[i].end, current.end));
+    } else {
+      merged.push(current);
+      current = intervals[i];
+    }
+  }
+
+  merged.push(current);
+
+  return merged;
+};
+
 // Implement in-place quicksort
 
 // Implement merge sort
