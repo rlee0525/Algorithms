@@ -576,6 +576,34 @@ const twoSum = (nums, target) => {
 };
 
 // Three sum
+const threeSum = nums => {
+  nums = nums.sort((a, b) => a - b);
+  let res = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    if (i === 0 || nums[i] !== nums[i - 1]) {
+      let low = i + 1;
+      let high = nums.length - 1;
+
+      while (low < high) {
+        if (nums[i] + nums[low] + nums[high] === 0) {
+          res.push([nums[i], nums[low], nums[high]]);
+          low++;
+          high--;
+
+          while (nums[low] === nums[low - 1]) low++;
+          while (nums[high] === nums[high + 1]) high--;
+        } else if (nums[i] + nums[low] + nums[high] > 0) {
+          high--;
+        } else {
+          low++;
+        }
+      }
+    }
+  }
+
+  return res;
+};
 
 // Implement in-place quicksort
 
