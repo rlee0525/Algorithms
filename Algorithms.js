@@ -927,6 +927,24 @@ const inorderTraversal = root => {
   return res;
 };
 
+// Buy and sell stocks
+const maxProfit = prices => {
+  let minCost = prices[0];
+  let maxPro = 0;
+
+  for (let i = 1; i < prices.length; i++) {
+    let currentPrice = prices[i];
+
+    if (currentPrice < minCost) {
+      minCost = currentPrice;
+    } else {
+      maxPro = Math.max(maxPro, currentPrice - minCost);
+    }
+  }
+
+  return maxPro;
+};
+
 // Implement in-place quicksort
 
 // Implement merge sort
