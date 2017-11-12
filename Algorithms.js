@@ -647,6 +647,37 @@ console.log(fibonacciDP(5) === 5);
 console.log(fibonacciDP(6) === 8);
 console.log(fibonacciDP(50) === 12586269025);
 
+// Determine if two words are anagrams
+const isAnagram = (word1, word2) => {
+  if (word1.length !== word2.length) return false;
+
+  let seen = {};
+
+  for (let i = 0; i < word1.length; i++) {
+    if (word1[i] in seen) {
+      seen[word1[i]]++;
+    } else {
+      seen[word1[i]] = 1;
+    }
+
+    if (word2[i] in seen) {
+      seen[word2[i]]--;
+    } else {
+      seen[word2[i]] = -1;
+    }
+  }
+
+  for (let char in seen) {
+    if (seen[char] !== 0) return false;
+  }
+
+  return true;
+};
+
+console.log(isAnagram("hello", "olelh") === true);
+console.log(isAnagram("hello", "oleh") === false);
+console.log(isAnagram("hello", "olehq") === false);
+
 // Implement in-place quicksort
 
 // Implement merge sort
@@ -654,7 +685,6 @@ console.log(fibonacciDP(50) === 12586269025);
 // Implement heaps
 
 
-// Determine if two words are anagrams
 
 // 3. Longest Substring Without Repeating Characters
 
