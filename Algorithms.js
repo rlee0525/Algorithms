@@ -605,13 +605,54 @@ const threeSum = nums => {
   return res;
 };
 
+// Fibonacci recursive and iterative
+const fibonacciRec = n => {
+  if (n < 0) return -1;
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+
+  return fibonacciRec(n - 1) + fibonacciRec(n - 2);
+};
+
+console.log(fibonacciRec(5) === 5);
+console.log(fibonacciRec(6) === 8);
+
+const fibonacciIter = n => {
+  let fib = [0, 1];
+
+  if (n < 2) return fib[n];
+
+  for (let i = 2; i <= n; i++) {
+    fib[i] = fib[i - 1] + fib[i - 2];
+  }
+
+  return fib[n];
+};
+
+console.log(fibonacciIter(5) === 5);
+console.log(fibonacciIter(6) === 8);
+console.log(fibonacciIter(50) === 12586269025);
+
+const fibonacciDP = (n, dp = {}) => {
+  dp[0] = 0;
+  dp[1] = 1;
+
+  if (n in dp) return dp[n];
+  dp[n] = fibonacciDP(n - 1, dp) + fibonacciDP(n - 2, dp);
+
+  return dp[n];
+};
+
+console.log(fibonacciDP(5) === 5);
+console.log(fibonacciDP(6) === 8);
+console.log(fibonacciDP(50) === 12586269025);
+
 // Implement in-place quicksort
 
 // Implement merge sort
 
 // Implement heaps
 
-// Fibonacci recursive and iterative
 
 // Determine if two words are anagrams
 
