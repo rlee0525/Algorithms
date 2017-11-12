@@ -689,8 +689,73 @@ const reverseList = (head, prev = null) => {
   return reverseList(head, current);
 };
 
+// Weighted Job Scheduling
+class Job {
+  constructor(start, finish, profit) {
+    this.start = start;
+    this.finish = finish;
+    this.profit = profit;
+  }
+}
 
-// 3. Longest Substring Without Repeating Characters
+const findMaxProfitDP = (arr) => {
+  arr = arr.sort((a, b) => a.finish - b.finish);
+  let profit = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    profit[i] = arr[i].profit;
+  }
+
+  let max = profit[0];
+  for (let i = 1; i < arr.length; i++) {
+    for (let j = i - 1; j >= 0; j--) {
+      if (arr[i].start >= arr[j].finish && profit[i] < profit[j] + arr[i].profit) {
+        profit[i] = profit[j] + arr[i].profit;
+      }
+
+      if (max < profit[i]) {
+        max = profit[i];
+      }
+    }
+  }
+
+  return max;
+};
+
+let job1 = new Job(3, 5, 20);
+let job2 = new Job(1, 2, 50);
+let job3 = new Job(6, 19, 100);
+let job4 = new Job(2, 100, 200);
+let jobs = [job1, job2, job3, job4];
+
+console.log(findMaxProfitDP(jobs) === 250);
+
+// Longest Substring Without Repeating Characters
+const lengthOfLongestSubstring = string => {
+  let seen = {};
+  let startIdx = 0;
+  let count = 0;
+
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] in seen && seen[string[i]] >= startIdx) {
+      startIdx = seen[string[i]] + 1;
+    } else {
+      count = Math.max(count, i - startIdx + 1);
+    }
+
+    seen[string[i]] = i;
+  }
+
+  return count;
+};
+
+
+// Is linked list circular?
+
+// Find the middle element of a linked list
+
+
+
 
 
 
@@ -709,7 +774,7 @@ const reverseList = (head, prev = null) => {
 
 // Find the first unique character of a given String.  
 
-// Find the middle element of a linked list
+
 
 // Simple bit manipulation question
 
