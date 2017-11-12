@@ -792,13 +792,58 @@ const longestValidParentheses = string => {
   return longest;
 };
 
+// House rob
+const rob = nums => {
+  if (nums.length === 0) return 0;
 
-// Find the middle element of a linked list
+  let amounts = [0, nums[0]];
 
+  for (let i = 1; i < nums.length; i++) {
+    // amounts[i] = not rob this house
+    // amounts[i - 1] + nums[i] = rob this house
+    amounts[i + 1] = Math.max(amounts[i], amounts[i - 1] + nums[i]);
+  }
 
+  return amounts[amounts.length - 1];
+};
 
+let houses1 = [10, 1000000, 50, 50, 101];
+let houses2 = [10, 10, 10, 10, 10];
+let houses3 = [10, 100, 120, 110, 110, 30, 500, 10, 2, 20];
 
+console.log(rob(houses1) === 1000101);
+console.log(rob(houses2) === 30);
+console.log(rob(houses3) === 760);
 
+// Roman to integer
+const romanToInt = s => {
+  let roman = {
+    "I": 1,
+    "V": 5,
+    "X": 10,
+    "L": 50,
+    "C": 100,
+    "D": 500,
+    "M": 1000
+  };
+
+  let prev = roman[s[s.length - 1]];
+  let idx = s.length - 2;
+  let res = prev;
+
+  while (idx >= 0) {
+    if (roman[s[idx]] < prev) {
+      res -= roman[s[idx]];
+    } else {
+      res += roman[s[idx]];
+    }
+
+    prev = roman[s[idx]];
+    idx -= 1;
+  }
+
+  return res;
+};
 
 
 // Implement in-place quicksort
