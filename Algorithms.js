@@ -750,7 +750,22 @@ const lengthOfLongestSubstring = string => {
 };
 
 
-// Is linked list circular?
+// Is linked list circular
+const hasCycle = head => {
+  if (!head) return false;
+
+  let slow = head;
+  let fast = head;
+
+  while (slow && fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+
+    if (slow === fast) return true;
+  }
+
+  return false;
+};
 
 // Find the middle element of a linked list
 
