@@ -678,6 +678,23 @@ console.log(isAnagram("hello", "olelh") === true);
 console.log(isAnagram("hello", "oleh") === false);
 console.log(isAnagram("hello", "olehq") === false);
 
+// How do you reverse a linked list in place?
+const reverseList = (head, prev = null) => {
+  if (!head) return prev;
+
+  let current = head;
+  head = head.next;
+  current.next = prev;
+
+  return reverseList(head, current);
+};
+
+
+// 3. Longest Substring Without Repeating Characters
+
+
+
+
 // Implement in-place quicksort
 
 // Implement merge sort
@@ -686,7 +703,6 @@ console.log(isAnagram("hello", "olehq") === false);
 
 
 
-// 3. Longest Substring Without Repeating Characters
 
 // 467. Unique Substrings in Wraparound String
 
@@ -697,7 +713,6 @@ console.log(isAnagram("hello", "olehq") === false);
 
 // Simple bit manipulation question
 
-// How do you reverse a linked list? Also in place.
 
 // OOP Concepts
 
