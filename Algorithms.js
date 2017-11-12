@@ -564,6 +564,19 @@ class LRUCache {
   }
 }
 
+// Two sum
+const twoSum = (nums, target) => {
+  let hash = {};
+
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] in hash) return [hash[nums[i], i]];
+    
+    hash[target - nums[i]] = i;
+  }
+};
+
+// Three sum
+
 // Implement in-place quicksort
 
 // Implement merge sort
@@ -578,7 +591,6 @@ class LRUCache {
 
 // 467. Unique Substrings in Wraparound String
 
-// Two sum
 
 // Find the first unique character of a given String.  
 
