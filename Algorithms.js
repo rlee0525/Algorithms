@@ -476,6 +476,94 @@ class Trie {
 
 // Implement LRU Cache
 
+class Node {
+  constructor(key, val) {
+    this.key = key;
+    this.val = val;
+    this.next = null;
+    this.prev = null;
+  }
+}
+
+class LRUCache {
+  constructor(capacity) {
+    this.map = {};
+    this.head = null;
+    this.tail = null;
+    this.size = capacity;
+    this.currSize = 0;
+  }
+
+  get(key) {
+    if (!(key in this.map)) return -1;
+
+    let node = this.map[key];
+
+    // if it's the head (Most recent), we just return the value
+    if (node === this.head) return node.val;
+
+    // if it's the tail (Least recent), we reset the tail to its prev
+    if (node === this.tail) {
+      this.tail.prev.next = null;
+      this.tail = this.tail.prev;
+
+    // if it's anywhere in the list, we just take the node out
+    } else {
+      node.prev.next = node.next;
+      node.next.prev = node.prev;
+    }
+
+    // place the node to the head
+    node.next = this.head;
+    this.head.prev = node;
+    this.head = node;
+
+    return node.val;
+  }
+
+  set(key, val) {
+    let newNode = new Node(key, val);
+
+    // empty linked list
+    if (this.currSize === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+      this.currSize++;
+    } else {
+      newNode.next = this.head;
+      this.head.prev = newNode;
+      this.head = newNode;
+      this.currSize++;
+    }
+
+    // already exists in the list
+    if (key in this.map) {
+      let oldNode = this.map[key];
+
+      // if least recently used;
+      if (oldNode === this.tail) {
+        this.tail = this.tail.prev;
+        this.tail.next = null;
+      } else {
+        oldNode.prev.next = oldNode.next;
+        oldNode.next.prev = oldNode.prev;
+      }
+
+      this.currSize--;
+      this.map[key] = newNode;
+    } else {
+      if (this.currSize > this.size) {
+        delete this.map[this.tail.key];
+        this.tail = this.tail.prev;
+        this.tail.next = null;
+        this.currSize--;
+      }
+
+      this.map[key] = newNode;
+    }
+  }
+}
+
 // Implement in-place quicksort
 
 // Implement merge sort
