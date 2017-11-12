@@ -889,6 +889,44 @@ const merge = intervals => {
   return merged;
 };
 
+// Inorder traversal
+const inorderTraversalRec = root => {
+  let res = [];
+  _inorder(root, res);
+  return res;
+};
+
+const _inorder = (root, res) => {
+  if (!root) return;
+
+  if (root.left) {
+    _inorder(root.left, res);
+  }
+
+  res.push(root.val);
+
+  if (root.right) {
+    _inorder(root.right, res);
+  }
+};
+
+const inorderTraversal = root => {
+  let res = [], stack = [];
+
+  while (stack.length !== 0 || root) {
+    if (root) {
+      stack.push(root);
+      root = root.left;
+    } else {
+      let current = stack.pop();
+      res.push(current.val);
+      root = current.right;
+    }
+  }
+
+  return res;
+};
+
 // Implement in-place quicksort
 
 // Implement merge sort
