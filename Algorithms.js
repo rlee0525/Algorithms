@@ -945,27 +945,54 @@ const maxProfit = prices => {
   return maxPro;
 };
 
+// Merge K Sorted lists
+
 // Implement in-place quicksort
 
+class QuickSort {
+  constructor(arr) {
+    this.arr = arr;
+  }
+
+  sort(arr = this.arr, s = 0, len = arr.length) {
+    if (len <= 1) return arr;
+
+    let pivot = this.partition(arr, s, len);
+    let left = pivot - s;
+    let right = len - left - 1;
+    this.sort(arr, s, left);
+    this.sort(arr, pivot + 1, right);
+  }
+
+  partition(arr, s, len) {
+    let partition = s;
+
+    for (let i = s + 1; i < s + len - 1; i++) {
+      if (arr[s] > arr[i]) {
+        let temp = arr[partition + 1];
+        arr[partition + 1] = arr[i];
+        arr[i] = temp;
+        partition++;
+      }
+    }
+
+    let temp = arr[s];
+    arr[s] = arr[partition];
+    arr[partition] = temp;
+
+    return partition;
+  }
+}
+
+let arr = new QuickSort([10, 5, 3, 12, 1, 4]);
+arr.sort();
+console.log(arr.arr);
+
 // Implement merge sort
-
 // Implement heaps
-
-
-
-
 // 467. Unique Substrings in Wraparound String
-
-
 // Find the first unique character of a given String.  
-
-
-
 // Simple bit manipulation question
-
-
 // OOP Concepts
-
-// Buy and sell stocks
 
 
